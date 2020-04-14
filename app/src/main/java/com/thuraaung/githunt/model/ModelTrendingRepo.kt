@@ -7,7 +7,7 @@ import com.thuraaung.githunt.model.ModelTrendingRepo.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
 data class ModelTrendingRepo(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id : String,
     @ColumnInfo(name = "author")
     val author: String,
