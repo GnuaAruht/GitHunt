@@ -4,6 +4,7 @@ import com.thuraaung.githunt.*
 import com.thuraaung.githunt.model.ModelTrendingRepo
 import com.thuraaung.githunt.repository.local.LocalDataSource
 import com.thuraaung.githunt.repository.remote.RemoteDataSource
+import com.thuraaung.githunt.utils.ResponseTrendingRepos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -47,7 +48,7 @@ class TrendingDataRepository (
         )
     }.flowOn(Dispatchers.IO)
 
-    private suspend fun getRemoteData() : Response<List<ModelTrendingRepo>> {
+    private suspend fun getRemoteData() : ResponseTrendingRepos {
         return remoteDataSource.getTrendingRepos()
     }
 
