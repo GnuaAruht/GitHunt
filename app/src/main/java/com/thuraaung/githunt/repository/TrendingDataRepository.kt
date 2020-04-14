@@ -2,7 +2,6 @@ package com.thuraaung.githunt.repository
 
 import com.thuraaung.githunt.*
 import com.thuraaung.githunt.model.ModelTrendingRepo
-import com.thuraaung.githunt.model.ResponseTrendingRepo
 import com.thuraaung.githunt.repository.local.LocalDataSource
 import com.thuraaung.githunt.repository.remote.RemoteDataSource
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +27,7 @@ class TrendingDataRepository (
 
             if(response.isSuccessful && result != null) {
 
-                saveDataToLocal(DataMapper.responseToModel(result))
+                saveDataToLocal(result)
 
             } else {
                 emit(ErrorState<List<ModelTrendingRepo>>("Unknown Error"))
@@ -48,7 +47,7 @@ class TrendingDataRepository (
         )
     }.flowOn(Dispatchers.IO)
 
-    private suspend fun getRemoteData() : Response<List<ResponseTrendingRepo>> {
+    private suspend fun getRemoteData() : Response<List<ModelTrendingRepo>> {
         return remoteDataSource.getTrendingRepos()
     }
 

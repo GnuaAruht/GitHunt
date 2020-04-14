@@ -23,7 +23,8 @@ abstract class TrendingRepoDb : RoomDatabase() {
                     context,
                     TrendingRepoDb::class.java,
                     "trending_db"
-                ).build().also {
+                ).fallbackToDestructiveMigration()
+                    .build().also {
                     INSTANCE = it
                 }
             }
