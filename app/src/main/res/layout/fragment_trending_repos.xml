@@ -7,6 +7,7 @@
     tools:context=".ui.TrendingReposFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_repos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/layout_repo_item"/>
