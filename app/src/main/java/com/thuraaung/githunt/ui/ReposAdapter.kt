@@ -3,9 +3,12 @@ package com.thuraaung.githunt.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.thuraaung.githunt.R
 import com.thuraaung.githunt.model.ModelTrendingRepo
+import com.thuraaung.githunt.utils.loadImage
 
 
 class ReposAdapter : RecyclerView.Adapter<ReposAdapter.RepoViewHolder>() {
@@ -31,8 +34,15 @@ class ReposAdapter : RecyclerView.Adapter<ReposAdapter.RepoViewHolder>() {
 
     inner class RepoViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
+        private val tvRepoName : TextView = view.findViewById(R.id.tv_repo_name)
+        private val tvAuthor : TextView = view.findViewById(R.id.tv_author)
+        private val imgAvator : ImageView = view.findViewById(R.id.img_avator)
+
         fun bind(repo : ModelTrendingRepo) {
 
+            tvRepoName.text = repo.name
+            tvAuthor.text = repo.author
+            imgAvator.loadImage(repo.avatar)
         }
     }
 }
