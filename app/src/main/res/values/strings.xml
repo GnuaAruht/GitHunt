@@ -15,4 +15,10 @@
     <string name="repo_name">Repo Name</string>
     <string name="description">Description</string>
     <string name="author">Author</string>
+    <string name="search">Search</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="yearly">Yearly</string>
+    <string name="language">Language</string>
+    <string name="search_language">Search Language</string>
 </resources>

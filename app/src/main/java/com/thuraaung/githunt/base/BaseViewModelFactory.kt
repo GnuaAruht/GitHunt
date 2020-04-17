@@ -1,4 +1,4 @@
-package com.thuraaung.githunt
+package com.thuraaung.githunt.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,8 +1,10 @@
 package com.thuraaung.githunt.repository.local
 
+import androidx.lifecycle.LiveData
 import com.thuraaung.githunt.db.TrendingRepoDb
+import com.thuraaung.githunt.model.ModelLanguage
 import com.thuraaung.githunt.model.ModelTrendingRepo
-import kotlinx.coroutines.flow.Flow
+import com.thuraaung.githunt.utils.FlowTrendingRepos
 
 
 class LocalDataSource(
@@ -13,7 +15,11 @@ class LocalDataSource(
         database.getDao().insert(repoList)
     }
 
-    fun getAllRepoList(): Flow<List<ModelTrendingRepo>> {
+    fun getAllRepoList(): FlowTrendingRepos {
         return database.getDao().getAllTrendingRepo()
+    }
+
+    fun searchLanguage(name : String) : LiveData<List<ModelLanguage>> {
+        return database.getDao().searchLanguage(name)
     }
 }

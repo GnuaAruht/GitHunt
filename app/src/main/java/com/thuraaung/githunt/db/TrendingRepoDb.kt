@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.thuraaung.githunt.model.ModelLanguage
 import com.thuraaung.githunt.model.ModelTrendingRepo
 
 
-@Database(entities = [ModelTrendingRepo::class],version = 1,exportSchema = false)
+@Database(entities = [ModelTrendingRepo::class,ModelLanguage::class],version = 2,exportSchema = false)
 abstract class TrendingRepoDb : RoomDatabase() {
 
     abstract fun getDao() : TrendingRepoDao

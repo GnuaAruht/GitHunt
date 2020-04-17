@@ -7,7 +7,20 @@
 
     <fragment
         android:id="@+id/trendingReposFragment"
-        android:name="com.thuraaung.githunt.ui.TrendingReposFragment"
+        android:name="com.thuraaung.githunt.ui.repo.TrendingReposFragment"
         android:label="fragment_trending_repos"
-        tools:layout="@layout/fragment_trending_repos" />
+        tools:layout="@layout/fragment_trending_repos" >
+
+        <action
+            android:id="@+id/action_trendingReposFragment_to_repoFilterFragment"
+            app:destination="@id/repoFilterFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/repoFilterFragment"
+        android:name="com.thuraaung.githunt.ui.language.LanguageFilterFragment"
+        android:label="fragment_repo_filter"
+        tools:layout="@layout/fragment_language_filter" />
+
 </navigation>

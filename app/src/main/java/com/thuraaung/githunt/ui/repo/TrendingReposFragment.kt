@@ -1,18 +1,20 @@
-package com.thuraaung.githunt.ui
+package com.thuraaung.githunt.ui.repo
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thuraaung.githunt.*
+import com.thuraaung.githunt.base.BaseViewModelFactory
 import com.thuraaung.githunt.repository.TrendingDataRepository
 import com.thuraaung.githunt.test.TestInjector
+import com.thuraaung.githunt.ui.MainViewModel
+import com.thuraaung.githunt.ui.ReposAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -27,7 +29,21 @@ class TrendingReposFragment : Fragment() {
         TestInjector.getTrendingRepository(requireContext())
     }
 
-    private val viewModel : MainViewModel by activityViewModels { BaseViewModelFactory{ MainViewModel(repository) } }
+    private val viewModel : MainViewModel by activityViewModels {
+        BaseViewModelFactory {
+            MainViewModel(repository)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_repo,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,5 +77,33 @@ class TrendingReposFragment : Fragment() {
         })
 
         viewModel.getTrendingRepos()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when(item.itemId) {
+            R.id.action_search -> {
+                findNavController().navigate(R.id.action_trendingReposFragment_to_repoFilterFragment)
+                true
+            }
+            R.id.action_daily -> {
+                Toast.makeText(context,"Daily",Toast.LENGTH_SHORT).show()
+                item.isChecked = !item.isChecked
+                true
+            }
+            R.id.action_weekly -> {
+                Toast.makeText(context,"Weekly",Toast.LENGTH_SHORT).show()
+                item.isChecked = !item.isChecked
+                true
+            }
+            R.id.action_yearly -> {
+                Toast.makeText(context,"Yearly",Toast.LENGTH_SHORT).show()
+                item.isChecked = !item.isChecked
+                true
+            }
+            else ->
+                super.onOptionsItemSelected(item)
+        }
+
     }
 }

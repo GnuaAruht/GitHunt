@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom"/>
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/action_daily"
+            android:title="@string/daily"
+            android:checked="true"
+            app:showAsAction="never"/>
+
+        <item
+            android:id="@+id/action_weekly"
+            android:title="@string/weekly"
+            app:showAsAction="never"/>
+
+        <item
+            android:id="@+id/action_yearly"
+            android:title="@string/yearly"
+            app:showAsAction="never"/>
+
+
+    </group>
+
+
+</menu>
