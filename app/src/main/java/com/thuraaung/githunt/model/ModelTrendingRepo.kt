@@ -2,6 +2,7 @@ package com.thuraaung.githunt.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.thuraaung.githunt.base.BaseItem
 import com.thuraaung.githunt.model.ModelTrendingRepo.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
@@ -16,7 +17,7 @@ data class ModelTrendingRepo(
     val languageColor: String? = null,
     val name: String,
     val stars: Int
-) {
+) : BaseItem {
 
     companion object {
         const val TABLE_NAME = "TrendingRepo"
