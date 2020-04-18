@@ -14,6 +14,7 @@ import com.thuraaung.githunt.ErrorState
 import com.thuraaung.githunt.LoadingState
 import com.thuraaung.githunt.R
 import com.thuraaung.githunt.SuccessState
+import com.thuraaung.githunt.base.BaseFragment
 import com.thuraaung.githunt.base.BaseViewModelFactory
 import com.thuraaung.githunt.repository.TrendingDataRepository
 import com.thuraaung.githunt.test.TestInjector
@@ -21,7 +22,7 @@ import com.thuraaung.githunt.ui.MainViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class LanguageFilterFragment : Fragment() {
+class LanguageFilterFragment : BaseFragment() {
 
     private lateinit var rvLanguage : RecyclerView
     private val languageAdapter : LanguageAdapter by lazy {
@@ -34,13 +35,8 @@ class LanguageFilterFragment : Fragment() {
 
     private val viewModel : MainViewModel by activityViewModels { BaseViewModelFactory{ MainViewModel(repository) } }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(
-            R.layout.fragment_language_filter, container, false)
-    }
+    override val layoutRes: Int
+        get() = R.layout.fragment_language_filter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

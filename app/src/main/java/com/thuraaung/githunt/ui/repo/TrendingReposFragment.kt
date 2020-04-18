@@ -10,19 +10,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thuraaung.githunt.*
+import com.thuraaung.githunt.base.BaseFragment
 import com.thuraaung.githunt.base.BaseViewModelFactory
 import com.thuraaung.githunt.repository.TrendingDataRepository
 import com.thuraaung.githunt.test.TestInjector
 import com.thuraaung.githunt.ui.MainViewModel
-import com.thuraaung.githunt.ui.ReposAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class TrendingReposFragment : Fragment() {
+class TrendingReposFragment : BaseFragment() {
 
     private lateinit var rvRepos : RecyclerView
-    private val repoAdapter : ReposAdapter by lazy {
-        ReposAdapter()
+    private val repoAdapter : RepoAdapter by lazy {
+        RepoAdapter()
     }
 
     private val repository : TrendingDataRepository by lazy {
@@ -45,12 +45,8 @@ class TrendingReposFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_trending_repos, container, false)
-    }
+    override val layoutRes: Int
+        get() = R.layout.fragment_trending_repos
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,7 +67,7 @@ class TrendingReposFragment : Fragment() {
                     Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show()
                 }
                 is SuccessState -> {
-                    repoAdapter.updateList(it.data)
+                    repoAdapter.updateItems(it.data)
                 }
             }
         })
