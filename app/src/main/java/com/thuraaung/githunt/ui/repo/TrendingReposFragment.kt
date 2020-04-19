@@ -1,14 +1,19 @@
 package com.thuraaung.githunt.ui.repo
 
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.thuraaung.githunt.*
+import com.thuraaung.githunt.ErrorState
+import com.thuraaung.githunt.LoadingState
+import com.thuraaung.githunt.R
+import com.thuraaung.githunt.SuccessState
 import com.thuraaung.githunt.base.BaseFragment
 import com.thuraaung.githunt.base.BaseViewModelFactory
 import com.thuraaung.githunt.repository.TrendingDataRepository
@@ -18,7 +23,6 @@ import com.thuraaung.githunt.utils.hide
 import com.thuraaung.githunt.utils.show
 import kotlinx.android.synthetic.main.fragment_trending_repos.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlin.random.Random
 
 @ExperimentalCoroutinesApi
 class TrendingReposFragment : BaseFragment() {
@@ -87,7 +91,9 @@ class TrendingReposFragment : BaseFragment() {
             setHasFixedSize(true)
         }
 
-        viewModel.getTrendingRepos()
+        if (viewModel.reposList.value !is SuccessState)
+            viewModel.getTrendingRepos()
+
         swLayout.setOnRefreshListener {
             viewModel.getTrendingRepos()
         }
