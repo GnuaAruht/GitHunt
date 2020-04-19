@@ -1,7 +1,7 @@
 package com.thuraaung.githunt.api
 
 import com.thuraaung.githunt.utils.ResponseLanguages
-import com.thuraaung.githunt.utils.ResponseTrendingRepos
+import com.thuraaung.githunt.utils.ResponseRepos
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,7 +14,7 @@ interface TrendingApiService {
         @Query("since")
         since : String = "daily",
         @Query("spoken_language_code")
-        spoken_language_code : String = "") : ResponseTrendingRepos
+        spoken_language_code : String = "") : ResponseRepos
 
     @GET("languages")
     suspend fun getLanguages() : ResponseLanguages

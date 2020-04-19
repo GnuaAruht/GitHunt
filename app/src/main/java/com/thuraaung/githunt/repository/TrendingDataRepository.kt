@@ -1,18 +1,22 @@
 package com.thuraaung.githunt.repository
 
-import androidx.lifecycle.LiveData
-import com.thuraaung.githunt.*
+import com.thuraaung.githunt.ErrorState
+import com.thuraaung.githunt.LoadingState
+import com.thuraaung.githunt.SuccessState
 import com.thuraaung.githunt.model.ModelLanguage
-import com.thuraaung.githunt.model.ModelTrendingRepo
+import com.thuraaung.githunt.model.ModelRepo
 import com.thuraaung.githunt.repository.local.LocalDataSource
 import com.thuraaung.githunt.repository.remote.RemoteDataSource
 import com.thuraaung.githunt.utils.FlowLanguages
 import com.thuraaung.githunt.utils.FlowTrendingRepos
 import com.thuraaung.githunt.utils.ResponseLanguages
-import com.thuraaung.githunt.utils.ResponseTrendingRepos
+import com.thuraaung.githunt.utils.ResponseRepos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 
 @ExperimentalCoroutinesApi
 class TrendingDataRepository (
@@ -23,7 +27,7 @@ class TrendingDataRepository (
 
     fun getTrendingRepos()  = flow {
 
-        emit(LoadingState<List<ModelTrendingRepo>>())
+        emit(LoadingState<List<ModelRepo>>())
 
         try {
 
@@ -35,24 +39,24 @@ class TrendingDataRepository (
                 saveReposToLocal(result)
 
             } else {
-                emit(ErrorState<List<ModelTrendingRepo>>("Unknown Error"))
+                emit(ErrorState<List<ModelRepo>>("Unknown Error"))
             }
 
         } catch (e : Exception) {
-            emit(ErrorState<List<ModelTrendingRepo>>("Cannot connect network"))
+            emit(ErrorState<List<ModelRepo>>("Cannot connect network"))
         }
 
         emitAll(
             getLocalRepos().map {
                 if(!it.isNullOrEmpty())
-                    SuccessState<List<ModelTrendingRepo>>(it)
+                    SuccessState<List<ModelRepo>>(it)
                 else
-                    ErrorState<List<ModelTrendingRepo>>("Database empty")
+                    ErrorState<List<ModelRepo>>("Database empty")
             }
         )
     }.flowOn(Dispatchers.IO)
 
-    fun getLanuages() = flow {
+    fun getLanuages(name : String) = flow {
 
         emit(LoadingState<List<ModelLanguage>>())
 
@@ -73,7 +77,7 @@ class TrendingDataRepository (
 
         }
 
-        emitAll(getLocalLanguages().map {
+        emitAll(getLocalLanguages(name).map {
             if(!it.isNullOrEmpty())
                 SuccessState<List<ModelLanguage>>(it)
             else
@@ -83,7 +87,7 @@ class TrendingDataRepository (
 
     }.flowOn(Dispatchers.IO)
 
-    private suspend fun getRemoteRepos() : ResponseTrendingRepos {
+    private suspend fun getRemoteRepos() : ResponseRepos {
         return remoteDataSource.getTrendingRepos()
     }
 
@@ -91,7 +95,7 @@ class TrendingDataRepository (
         return localDataSource.getAllRepos()
     }
 
-    private fun saveReposToLocal(repoList : List<ModelTrendingRepo>) {
+    private fun saveReposToLocal(repoList : List<ModelRepo>) {
         localDataSource.insertRepos(repoList)
     }
 
@@ -107,7 +111,7 @@ class TrendingDataRepository (
         return localDataSource.isCacheAvailable()
     }
 
-    private fun getLocalLanguages() : FlowLanguages {
-        return localDataSource.getAllLanguage()
+    private fun getLocalLanguages(name : String) : FlowLanguages {
+        return localDataSource.searchLanguage(name)
     }
 }

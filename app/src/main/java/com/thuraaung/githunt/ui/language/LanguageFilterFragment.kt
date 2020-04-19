@@ -1,11 +1,9 @@
 package com.thuraaung.githunt.ui.language
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +23,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class LanguageFilterFragment : BaseFragment() {
 
     private lateinit var rvLanguage : RecyclerView
+    private lateinit var searchView : SearchView
+
     private val languageAdapter : LanguageAdapter by lazy {
         LanguageAdapter()
     }
@@ -42,6 +42,8 @@ class LanguageFilterFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rvLanguage = view.findViewById(R.id.rv_language)
+        searchView = view.findViewById(R.id.search)
+
         rvLanguage.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -54,7 +56,8 @@ class LanguageFilterFragment : BaseFragment() {
                     Toast.makeText(context,"Loading",Toast.LENGTH_SHORT).show()
                 }
                 is ErrorState -> {
-                    Toast.makeText(context,"Loading",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"No Data",Toast.LENGTH_SHORT).show()
+                    languageAdapter.updateItems(emptyList())
                 }
                 is SuccessState -> {
                     languageAdapter.updateItems(it.data)
@@ -62,7 +65,18 @@ class LanguageFilterFragment : BaseFragment() {
             }
         })
 
-        viewModel.getLanguages()
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.getLanguages(if(query != null) "$query%" else "%")
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.getLanguages(if(newText != null) "$newText%" else "%")
+                return true
+            }
+        })
     }
 
 }

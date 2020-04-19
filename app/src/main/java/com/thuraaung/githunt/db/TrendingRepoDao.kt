@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.thuraaung.githunt.model.ModelLanguage
-import com.thuraaung.githunt.model.ModelTrendingRepo
+import com.thuraaung.githunt.model.ModelRepo
 import com.thuraaung.githunt.utils.FlowLanguages
 import com.thuraaung.githunt.utils.FlowTrendingRepos
 import kotlinx.coroutines.flow.Flow
@@ -14,9 +14,9 @@ import kotlinx.coroutines.flow.Flow
 interface TrendingRepoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRepos(repoList : List<ModelTrendingRepo>)
+    fun insertRepos(repoList : List<ModelRepo>)
 
-    @Query("SELECT * FROM ${ModelTrendingRepo.TABLE_NAME} order by stars desc")
+    @Query("SELECT * FROM ${ModelRepo.TABLE_NAME} order by stars desc")
     fun getAllTrendingRepo() : FlowTrendingRepos
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

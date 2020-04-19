@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import com.thuraaung.githunt.R
 import com.thuraaung.githunt.base.BaseAdapter
 import com.thuraaung.githunt.base.DiffUtilCallback
-import com.thuraaung.githunt.model.ModelTrendingRepo
+import com.thuraaung.githunt.model.ModelRepo
 
 
-class RepoAdapter : BaseAdapter<ModelTrendingRepo,RepoViewHolder>() {
+class RepoAdapter : BaseAdapter<ModelRepo,RepoViewHolder>() {
 
-    override val diffUtilCallback: DiffUtilCallback<ModelTrendingRepo>
+    override val diffUtilCallback: DiffUtilCallback<ModelRepo>
         get() = languageUtilCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
@@ -20,7 +20,7 @@ class RepoAdapter : BaseAdapter<ModelTrendingRepo,RepoViewHolder>() {
     }
 }
 
-private val languageUtilCallback = object : DiffUtilCallback<ModelTrendingRepo>() {
+private val languageUtilCallback = object : DiffUtilCallback<ModelRepo>() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldItemList[oldItemPosition].url == newItemList[newItemPosition].url

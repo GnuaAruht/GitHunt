@@ -2,18 +2,18 @@ package com.thuraaung.githunt.utils
 
 import com.thuraaung.githunt.ViewState
 import com.thuraaung.githunt.model.ModelLanguage
-import com.thuraaung.githunt.model.ModelTrendingRepo
+import com.thuraaung.githunt.model.ModelRepo
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
-typealias ResponseTrendingRepos = Response<List<ModelTrendingRepo>>
+typealias ResponseRepos = Response<List<ModelRepo>>
 
-typealias FlowTrendingRepos = Flow<List<ModelTrendingRepo>>
+typealias FlowTrendingRepos = Flow<List<ModelRepo>>
 
 typealias ResponseLanguages = Response<List<ModelLanguage>>
 
 typealias FlowLanguages = Flow<List<ModelLanguage>>
 
-typealias ViewTrendingRepos = ViewState<List<ModelTrendingRepo>>
+typealias ViewTrendingRepos = ViewState<List<ModelRepo>>
 
-typealias ViewLangaues = ViewState<List<ModelLanguage>>
+typealias ViewLanguages = ViewState<List<ModelLanguage>>
