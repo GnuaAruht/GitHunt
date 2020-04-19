@@ -1,6 +1,7 @@
 package com.thuraaung.githunt.ui.language
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -64,6 +65,8 @@ class LanguageFilterFragment : BaseFragment() {
                 }
             }
         })
+
+        viewModel.getLanguages()
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 

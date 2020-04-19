@@ -1,5 +1,6 @@
 package com.thuraaung.githunt.utils
 
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -14,4 +15,13 @@ fun ImageView.loadImage(url : String) {
         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
         .apply(RequestOptions.circleCropTransform())
         .into(this)
+}
+
+fun View.show() {
+    visibility = View.VISIBLE
+}
+
+
+fun View.hide() {
+    visibility = View.GONE
 }

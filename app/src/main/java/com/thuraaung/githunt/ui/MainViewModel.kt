@@ -33,7 +33,7 @@ class MainViewModel(private val repository: TrendingDataRepository) : ViewModel(
         }
     }
 
-    fun getLanguages(name : String) {
+    fun getLanguages(name : String = "%") {
         viewModelScope.launch {
             repository.getLanuages(name).collect {
                 _languages.postValue(it)

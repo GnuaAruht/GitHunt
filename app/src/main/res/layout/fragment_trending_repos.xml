@@ -2,12 +2,13 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.repo.TrendingReposFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_repos"
+        android:id="@+id/rvRepos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/layout_repo_item"/>
