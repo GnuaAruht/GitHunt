@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thuraaung.githunt.ErrorState
@@ -15,31 +16,23 @@ import com.thuraaung.githunt.LoadingState
 import com.thuraaung.githunt.R
 import com.thuraaung.githunt.SuccessState
 import com.thuraaung.githunt.base.BaseFragment
-import com.thuraaung.githunt.base.BaseViewModelFactory
-import com.thuraaung.githunt.repository.TrendingDataRepository
-import com.thuraaung.githunt.test.TestInjector
 import com.thuraaung.githunt.ui.MainViewModel
 import com.thuraaung.githunt.utils.hide
 import com.thuraaung.githunt.utils.show
 import kotlinx.android.synthetic.main.fragment_trending_repos.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class TrendingReposFragment : BaseFragment() {
 
-    private val repoAdapter : RepoAdapter by lazy {
-        RepoAdapter()
-    }
+    @Inject
+    lateinit var repoAdapter: RepoAdapter
 
-    private val repository : TrendingDataRepository by lazy {
-        TestInjector.getTrendingRepository(requireContext())
-    }
+    @Inject
+    lateinit var viewModelFactory : ViewModelProvider.Factory
 
-    private val viewModel : MainViewModel by activityViewModels {
-        BaseViewModelFactory {
-            MainViewModel(repository)
-        }
-    }
+    private val viewModel : MainViewModel by activityViewModels { viewModelFactory }
 
     override val layoutRes: Int
         get() = R.layout.fragment_trending_repos
@@ -57,7 +50,7 @@ class TrendingReposFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return when(item.itemId) {
-            R.id.action_search -> {
+            R.id.action_filter -> {
                 findNavController().navigate(R.id.action_trendingReposFragment_to_repoFilterFragment)
                 true
             }
@@ -105,7 +98,8 @@ class TrendingReposFragment : BaseFragment() {
                 }
                 is ErrorState -> {
                     hideLoading()
-                    showErrorPlaceHolder()
+                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+//                    showErrorPlaceHolder()
                 }
                 is SuccessState -> {
                     hideLoading()

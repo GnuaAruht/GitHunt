@@ -10,10 +10,11 @@ import com.thuraaung.githunt.utils.ViewTrendingRepos
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @ExperimentalCoroutinesApi
-class MainViewModel(private val repository: TrendingDataRepository) : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: TrendingDataRepository) : ViewModel() {
 
 
     private val _reposList = MutableLiveData<ViewTrendingRepos>()

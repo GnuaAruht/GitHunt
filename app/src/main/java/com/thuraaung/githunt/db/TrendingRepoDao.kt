@@ -1,9 +1,6 @@
 package com.thuraaung.githunt.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.thuraaung.githunt.model.ModelLanguage
 import com.thuraaung.githunt.model.ModelRepo
 import com.thuraaung.githunt.utils.FlowLanguages
@@ -18,6 +15,9 @@ interface TrendingRepoDao {
 
     @Query("SELECT * FROM ${ModelRepo.TABLE_NAME} order by stars desc")
     fun getAllTrendingRepo() : FlowTrendingRepos
+
+    @Query("DELETE FROM ${ModelRepo.TABLE_NAME}")
+    suspend fun deleteAllRepo()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLanguages(language: List<ModelLanguage>)

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thuraaung.githunt.ErrorState
@@ -18,23 +19,20 @@ import com.thuraaung.githunt.base.BaseViewModelFactory
 import com.thuraaung.githunt.repository.TrendingDataRepository
 import com.thuraaung.githunt.test.TestInjector
 import com.thuraaung.githunt.ui.MainViewModel
+import kotlinx.android.synthetic.main.fragment_language_filter.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class LanguageFilterFragment : BaseFragment() {
 
-    private lateinit var rvLanguage : RecyclerView
-    private lateinit var searchView : SearchView
+    @Inject
+    lateinit var languageAdapter : LanguageAdapter
 
-    private val languageAdapter : LanguageAdapter by lazy {
-        LanguageAdapter()
-    }
+    @Inject
+    lateinit var viewModelFactory : ViewModelProvider.Factory
 
-    private val repository : TrendingDataRepository by lazy {
-        TestInjector.getTrendingRepository(requireContext())
-    }
-
-    private val viewModel : MainViewModel by activityViewModels { BaseViewModelFactory{ MainViewModel(repository) } }
+    private val viewModel : MainViewModel by activityViewModels { viewModelFactory }
 
     override val layoutRes: Int
         get() = R.layout.fragment_language_filter
@@ -42,14 +40,14 @@ class LanguageFilterFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rvLanguage = view.findViewById(R.id.rv_language)
-        searchView = view.findViewById(R.id.search)
-
         rvLanguage.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = languageAdapter
         }
+
+        if(viewModel.languages.value !is SuccessState)
+            viewModel.getLanguages()
 
         viewModel.languages.observe(viewLifecycleOwner, Observer {
             when(it) {
@@ -65,8 +63,6 @@ class LanguageFilterFragment : BaseFragment() {
                 }
             }
         })
-
-        viewModel.getLanguages()
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 

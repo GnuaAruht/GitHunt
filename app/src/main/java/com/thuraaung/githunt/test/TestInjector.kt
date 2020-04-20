@@ -3,6 +3,7 @@ package com.thuraaung.githunt.test
 import android.content.Context
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.thuraaung.githunt.BuildConfig
 import com.thuraaung.githunt.api.TrendingApiService
 import com.thuraaung.githunt.db.TrendingRepoDb
 import com.thuraaung.githunt.repository.TrendingDataRepository
@@ -30,7 +31,7 @@ object TestInjector {
     }
 
     private fun getLocalDataSource(context : Context) : LocalDataSource {
-        return LocalDataSource(TrendingRepoDb.getInstance(context))
+        return LocalDataSource(TrendingRepoDb.getInstance(context).getDao())
     }
 
     private fun getTrendingApiService() : TrendingApiService {
@@ -57,7 +58,10 @@ object TestInjector {
 
     private fun getLoggingInterceptor() : HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
+            if (BuildConfig.DEBUG)
+                level = HttpLoggingInterceptor.Level.BODY
+            else
+                level = HttpLoggingInterceptor.Level.HEADERS
         }
     }
 }

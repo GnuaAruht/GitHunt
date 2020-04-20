@@ -17,9 +17,10 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class TrendingDataRepository (
+class TrendingDataRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) {
@@ -36,6 +37,7 @@ class TrendingDataRepository (
 
             if(response.isSuccessful && result != null) {
 
+//                clearOldData()
                 saveReposToLocal(result)
 
             } else {
@@ -93,6 +95,10 @@ class TrendingDataRepository (
 
     private fun getLocalRepos() : FlowTrendingRepos {
         return localDataSource.getAllRepos()
+    }
+
+    private suspend fun clearOldData() {
+        localDataSource.deleteAllRepos()
     }
 
     private fun saveReposToLocal(repoList : List<ModelRepo>) {

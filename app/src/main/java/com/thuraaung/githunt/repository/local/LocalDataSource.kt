@@ -1,37 +1,43 @@
 package com.thuraaung.githunt.repository.local
 
+import com.thuraaung.githunt.db.TrendingRepoDao
 import com.thuraaung.githunt.db.TrendingRepoDb
 import com.thuraaung.githunt.model.ModelLanguage
 import com.thuraaung.githunt.model.ModelRepo
 import com.thuraaung.githunt.utils.FlowLanguages
 import com.thuraaung.githunt.utils.FlowTrendingRepos
+import javax.inject.Inject
 
 
-class LocalDataSource(
-    private val database : TrendingRepoDb
+class LocalDataSource @Inject constructor(
+    private val repoDao : TrendingRepoDao
 )  {
 
     fun insertRepos(repoList: List<ModelRepo>) {
-        database.getDao().insertRepos(repoList)
+        repoDao.insertRepos(repoList)
     }
 
     fun getAllRepos(): FlowTrendingRepos {
-        return database.getDao().getAllTrendingRepo()
+        return repoDao.getAllTrendingRepo()
+    }
+
+    suspend fun deleteAllRepos() {
+        repoDao.deleteAllRepo()
     }
 
     fun getAllLanguage() : FlowLanguages {
-        return database.getDao().getAllLanguage()
+        return repoDao.getAllLanguage()
     }
 
     fun insertLanguages(languageList : List<ModelLanguage>) {
-        database.getDao().insertLanguages(languageList)
+        repoDao.insertLanguages(languageList)
     }
 
     fun searchLanguage(name : String) : FlowLanguages {
-        return database.getDao().searchLanguage(name)
+        return repoDao.searchLanguage(name)
     }
 
     fun isCacheAvailable() : Boolean {
-        return database.getDao().getLanguageCount() > 0
+        return repoDao.getLanguageCount() > 0
     }
 }
