@@ -20,6 +20,8 @@
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/searchView"
                 app:queryHint="@string/search_language"
+                app:iconifiedByDefault="false"
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

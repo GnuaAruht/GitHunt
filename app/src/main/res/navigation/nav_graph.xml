@@ -8,19 +8,19 @@
     <fragment
         android:id="@+id/trendingReposFragment"
         android:name="com.thuraaung.githunt.ui.repo.TrendingReposFragment"
-        android:label="fragment_trending_repos"
+        android:label="Github Trending Repos"
         tools:layout="@layout/fragment_trending_repos" >
 
         <action
             android:id="@+id/action_trendingReposFragment_to_repoFilterFragment"
-            app:destination="@id/repoFilterFragment" />
+            app:destination="@id/languageFilterFragment" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/repoFilterFragment"
+        android:id="@+id/languageFilterFragment"
         android:name="com.thuraaung.githunt.ui.language.LanguageFilterFragment"
-        android:label="fragment_repo_filter"
+        android:label="Filter Language"
         tools:layout="@layout/fragment_language_filter" />
 
 </navigation>

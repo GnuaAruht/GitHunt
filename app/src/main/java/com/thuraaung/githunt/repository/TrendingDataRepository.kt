@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -37,7 +38,7 @@ class TrendingDataRepository @Inject constructor(
 
             if(response.isSuccessful && result != null) {
 
-//                clearOldData()
+                clearOldData()
                 saveReposToLocal(result)
 
             } else {
