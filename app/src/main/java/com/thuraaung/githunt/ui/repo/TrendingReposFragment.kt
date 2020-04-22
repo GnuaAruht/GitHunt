@@ -27,12 +27,13 @@ import javax.inject.Inject
 class TrendingReposFragment : BaseFragment() {
 
     @Inject
-    lateinit var repoAdapter: RepoAdapter
-
-    @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
 
     private val viewModel : MainViewModel by activityViewModels { viewModelFactory }
+
+    private val repoAdapter: RepoAdapter by lazy {
+        RepoAdapter { repo -> Toast.makeText(context,"${repo.name}",Toast.LENGTH_SHORT).show() }
+    }
 
     override val layoutRes: Int
         get() = R.layout.fragment_trending_repos

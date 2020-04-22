@@ -6,9 +6,10 @@ import com.thuraaung.githunt.R
 import com.thuraaung.githunt.base.BaseAdapter
 import com.thuraaung.githunt.base.DiffUtilCallback
 import com.thuraaung.githunt.model.ModelRepo
+import com.thuraaung.githunt.utils.listen
 
 
-class RepoAdapter : BaseAdapter<ModelRepo,RepoViewHolder>() {
+class RepoAdapter(private val itemClickCallback : (repo : ModelRepo) -> Unit) : BaseAdapter<ModelRepo,RepoViewHolder>() {
 
     override val diffUtilCallback: DiffUtilCallback<ModelRepo>
         get() = languageUtilCallback
@@ -16,7 +17,9 @@ class RepoAdapter : BaseAdapter<ModelRepo,RepoViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_repo_item,parent,false)
-        return RepoViewHolder(view)
+        return RepoViewHolder(view).listen { position ->
+            itemClickCallback.invoke(itemList[position])
+        }
     }
 }
 

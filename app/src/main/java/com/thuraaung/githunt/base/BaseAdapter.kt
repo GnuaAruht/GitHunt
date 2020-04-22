@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseAdapter<T : BaseItem,V : BaseViewHolder<T>>() : RecyclerView.Adapter<V>() {
 
-    private val itemList = mutableListOf<T>()
+    protected val itemList = mutableListOf<T>()
 
     protected abstract val diffUtilCallback : DiffUtilCallback<T>
 

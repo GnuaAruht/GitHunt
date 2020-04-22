@@ -6,9 +6,10 @@ import com.thuraaung.githunt.R
 import com.thuraaung.githunt.base.BaseAdapter
 import com.thuraaung.githunt.base.DiffUtilCallback
 import com.thuraaung.githunt.model.ModelLanguage
+import com.thuraaung.githunt.utils.listen
 
 
-class LanguageAdapter : BaseAdapter<ModelLanguage,LanguageViewHolder>() {
+class LanguageAdapter(private val itemClickCallback : (item : ModelLanguage) -> Unit) : BaseAdapter<ModelLanguage,LanguageViewHolder>() {
 
     override val diffUtilCallback: DiffUtilCallback<ModelLanguage>
         get() = languageDiffUtil
@@ -16,7 +17,9 @@ class LanguageAdapter : BaseAdapter<ModelLanguage,LanguageViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LanguageViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_language_item,parent,false)
-        return LanguageViewHolder(view)
+        return LanguageViewHolder(view).listen { position ->
+            itemClickCallback.invoke(itemList[position])
+        }
     }
 }
 

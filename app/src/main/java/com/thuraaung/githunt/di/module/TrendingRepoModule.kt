@@ -8,6 +8,6 @@ import dagger.Provides
 @Module
 class TrendingRepoModule  {
 
-    @Provides
-    fun provideRepoAdapter() = RepoAdapter()
+//    @Provides
+//    fun provideRepoAdapter() = RepoAdapter()
 }
