@@ -22,4 +22,5 @@
     <string name="language">Language</string>
     <string name="search_language">Search Language</string>
     <string name="filter">Filter</string>
+    <string name="monthly">Monthly</string>
 </resources>

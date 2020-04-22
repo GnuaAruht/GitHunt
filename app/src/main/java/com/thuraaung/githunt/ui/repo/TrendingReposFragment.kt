@@ -11,12 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.thuraaung.githunt.ErrorState
-import com.thuraaung.githunt.LoadingState
+import com.thuraaung.githunt.utils.ErrorState
+import com.thuraaung.githunt.utils.LoadingState
 import com.thuraaung.githunt.R
-import com.thuraaung.githunt.SuccessState
+import com.thuraaung.githunt.utils.SuccessState
 import com.thuraaung.githunt.base.BaseFragment
 import com.thuraaung.githunt.ui.MainViewModel
+import com.thuraaung.githunt.utils.FilterBy
 import com.thuraaung.githunt.utils.hide
 import com.thuraaung.githunt.utils.show
 import kotlinx.android.synthetic.main.fragment_trending_repos.*
@@ -56,17 +57,17 @@ class TrendingReposFragment : BaseFragment() {
                 true
             }
             R.id.action_daily -> {
-                Toast.makeText(context,"Daily",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,FilterBy.DAILY.value,Toast.LENGTH_SHORT).show()
                 item.isChecked = !item.isChecked
                 true
             }
             R.id.action_weekly -> {
-                Toast.makeText(context,"Weekly",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,FilterBy.WEEKLY.value,Toast.LENGTH_SHORT).show()
                 item.isChecked = !item.isChecked
                 true
             }
-            R.id.action_yearly -> {
-                Toast.makeText(context,"Yearly",Toast.LENGTH_SHORT).show()
+            R.id.action_monthly -> {
+                Toast.makeText(context,FilterBy.MONTHLY.value,Toast.LENGTH_SHORT).show()
                 item.isChecked = !item.isChecked
                 true
             }

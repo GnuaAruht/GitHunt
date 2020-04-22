@@ -1,6 +1,5 @@
 package com.thuraaung.githunt.utils
 
-import com.thuraaung.githunt.ViewState
 import com.thuraaung.githunt.model.ModelLanguage
 import com.thuraaung.githunt.model.ModelRepo
 import kotlinx.coroutines.flow.Flow

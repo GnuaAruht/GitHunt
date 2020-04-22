@@ -10,8 +10,8 @@ class RemoteDataSource @Inject constructor(
     private val apiService: TrendingApiService
 ) {
 
-    suspend fun getTrendingRepos() : ResponseRepos {
-        return apiService.getTrendingRepos()
+    suspend fun getTrendingRepos(language : String,filterBy : String) : ResponseRepos {
+        return apiService.getTrendingRepos(language,filterBy)
     }
 
     suspend fun getLanguages() : ResponseLanguages {

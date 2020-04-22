@@ -1,5 +1,6 @@
 package com.thuraaung.githunt.utils
 
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -29,4 +30,11 @@ fun View.hide() {
 fun <T : RecyclerView.ViewHolder> T.listen(callback : (position : Int) -> Unit) : T {
     itemView.setOnClickListener { callback.invoke(adapterPosition) }
     return this
+}
+
+fun Context.savePreference(key : String, value : String) {
+    getSharedPreferences("", Context.MODE_PRIVATE)
+        .edit()
+        .putString(key,value)
+        .apply()
 }

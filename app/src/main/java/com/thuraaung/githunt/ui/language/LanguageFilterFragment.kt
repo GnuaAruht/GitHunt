@@ -9,10 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.thuraaung.githunt.ErrorState
-import com.thuraaung.githunt.LoadingState
+import com.thuraaung.githunt.utils.ErrorState
+import com.thuraaung.githunt.utils.LoadingState
 import com.thuraaung.githunt.R
-import com.thuraaung.githunt.SuccessState
+import com.thuraaung.githunt.utils.SuccessState
 import com.thuraaung.githunt.base.BaseFragment
 import com.thuraaung.githunt.ui.MainViewModel
 import kotlinx.android.synthetic.main.fragment_language_filter.*
@@ -30,6 +30,7 @@ class LanguageFilterFragment : BaseFragment() {
     private val languageAdapter : LanguageAdapter by lazy {
         LanguageAdapter { item ->
             iActivity.hideSoftKeyboard()
+            viewModel.getLanguages()
             findNavController().popBackStack(R.id.trendingReposFragment,false)
         }
     }

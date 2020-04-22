@@ -10,11 +10,9 @@ interface TrendingApiService {
     @GET("repositories")
     suspend fun getTrendingRepos(
         @Query("language")
-        language : String = "",
+        language : String,
         @Query("since")
-        since : String = "daily",
-        @Query("spoken_language_code")
-        spoken_language_code : String = "") : ResponseRepos
+        since : String ) : ResponseRepos
 
     @GET("languages")
     suspend fun getLanguages() : ResponseLanguages

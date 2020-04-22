@@ -1,8 +1,8 @@
 package com.thuraaung.githunt.repository
 
-import com.thuraaung.githunt.ErrorState
-import com.thuraaung.githunt.LoadingState
-import com.thuraaung.githunt.SuccessState
+import com.thuraaung.githunt.utils.ErrorState
+import com.thuraaung.githunt.utils.LoadingState
+import com.thuraaung.githunt.utils.SuccessState
 import com.thuraaung.githunt.model.ModelLanguage
 import com.thuraaung.githunt.model.ModelRepo
 import com.thuraaung.githunt.repository.local.LocalDataSource
@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -27,13 +26,13 @@ class TrendingDataRepository @Inject constructor(
 ) {
 
 
-    fun getTrendingRepos()  = flow {
+    fun getTrendingRepos(language : String,filterBy : String)  = flow {
 
         emit(LoadingState<List<ModelRepo>>())
 
         try {
 
-            val response = getRemoteRepos()
+            val response = getRemoteRepos(language,filterBy)
             val result = response.body()
 
             if(response.isSuccessful && result != null) {
@@ -42,11 +41,15 @@ class TrendingDataRepository @Inject constructor(
                 saveReposToLocal(result)
 
             } else {
-                emit(ErrorState<List<ModelRepo>>("Unknown Error"))
+                emit(
+                    ErrorState<List<ModelRepo>>("Unknown Error")
+                )
             }
 
         } catch (e : Exception) {
-            emit(ErrorState<List<ModelRepo>>("Cannot connect network"))
+            emit(
+                ErrorState<List<ModelRepo>>("Cannot connect network")
+            )
         }
 
         emitAll(
@@ -71,11 +74,15 @@ class TrendingDataRepository @Inject constructor(
                 if (response.isSuccessful && body != null) {
                     saveLanguageToLocal(body)
                 } else {
-                    emit(ErrorState<List<ModelLanguage>>("Language Request Failed"))
+                    emit(
+                        ErrorState<List<ModelLanguage>>("Language Request Failed")
+                    )
                 }
 
             } catch (e : Exception) {
-                emit(ErrorState<List<ModelLanguage>>("Language Request Failed"))
+                emit(
+                    ErrorState<List<ModelLanguage>>("Language Request Failed")
+                )
             }
 
         }
@@ -90,8 +97,8 @@ class TrendingDataRepository @Inject constructor(
 
     }.flowOn(Dispatchers.IO)
 
-    private suspend fun getRemoteRepos() : ResponseRepos {
-        return remoteDataSource.getTrendingRepos()
+    private suspend fun getRemoteRepos(language : String,filterBy: String) : ResponseRepos {
+        return remoteDataSource.getTrendingRepos(language,filterBy)
     }
 
     private fun getLocalRepos() : FlowTrendingRepos {

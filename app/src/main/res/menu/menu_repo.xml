@@ -23,8 +23,8 @@
             app:showAsAction="never"/>
 
         <item
-            android:id="@+id/action_yearly"
-            android:title="@string/yearly"
+            android:id="@+id/action_monthly"
+            android:title="@string/monthly"
             app:showAsAction="never"/>
 
 
