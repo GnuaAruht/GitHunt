@@ -11,15 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.thuraaung.githunt.utils.ErrorState
-import com.thuraaung.githunt.utils.LoadingState
 import com.thuraaung.githunt.R
-import com.thuraaung.githunt.utils.SuccessState
 import com.thuraaung.githunt.base.BaseFragment
 import com.thuraaung.githunt.ui.MainViewModel
-import com.thuraaung.githunt.utils.FilterBy
-import com.thuraaung.githunt.utils.hide
-import com.thuraaung.githunt.utils.show
+import com.thuraaung.githunt.utils.*
 import kotlinx.android.synthetic.main.fragment_trending_repos.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
@@ -57,17 +52,17 @@ class TrendingReposFragment : BaseFragment() {
                 true
             }
             R.id.action_daily -> {
-                Toast.makeText(context,FilterBy.DAILY.value,Toast.LENGTH_SHORT).show()
+                viewModel.filterSinceBy(SINCE_DAILY)
                 item.isChecked = !item.isChecked
                 true
             }
             R.id.action_weekly -> {
-                Toast.makeText(context,FilterBy.WEEKLY.value,Toast.LENGTH_SHORT).show()
+                viewModel.filterSinceBy(SINCE_WEEKLY)
                 item.isChecked = !item.isChecked
                 true
             }
             R.id.action_monthly -> {
-                Toast.makeText(context,FilterBy.MONTHLY.value,Toast.LENGTH_SHORT).show()
+                viewModel.filterSinceBy(SINCE_MONTHLY)
                 item.isChecked = !item.isChecked
                 true
             }

@@ -32,9 +32,22 @@ fun <T : RecyclerView.ViewHolder> T.listen(callback : (position : Int) -> Unit) 
     return this
 }
 
-fun Context.savePreference(key : String, value : String) {
-    getSharedPreferences("", Context.MODE_PRIVATE)
-        .edit()
-        .putString(key,value)
-        .apply()
+fun Context.savePreference(key : String, value : String) : Boolean {
+
+    val prefValue = getPreferenceString(key,"NO_VALUE")
+    return if(prefValue != value) {
+        getSharedPreferences(APP_PREF, Context.MODE_PRIVATE)
+            .edit()
+            .putString(key,value)
+            .apply()
+        true
+    } else {
+        false
+    }
+
+}
+
+fun Context.getPreferenceString(key : String,defaultValue : String) : String {
+    return getSharedPreferences(APP_PREF,Context.MODE_PRIVATE)
+        .getString(key,null) ?: defaultValue
 }

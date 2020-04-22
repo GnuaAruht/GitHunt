@@ -30,6 +30,7 @@ class LanguageFilterFragment : BaseFragment() {
     private val languageAdapter : LanguageAdapter by lazy {
         LanguageAdapter { item ->
             iActivity.hideSoftKeyboard()
+            viewModel.filterLanguageBy(item.urlParam)
             viewModel.getLanguages()
             findNavController().popBackStack(R.id.trendingReposFragment,false)
         }

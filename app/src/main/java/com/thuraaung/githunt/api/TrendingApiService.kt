@@ -12,7 +12,9 @@ interface TrendingApiService {
         @Query("language")
         language : String,
         @Query("since")
-        since : String ) : ResponseRepos
+        since : String,
+        @Query("spoken_language_code")
+        spoken_language : String = "") : ResponseRepos
 
     @GET("languages")
     suspend fun getLanguages() : ResponseLanguages

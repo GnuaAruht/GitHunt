@@ -30,8 +30,8 @@ class ApiModule {
     @Provides
     fun provideHttpClient() : OkHttpClient {
         return OkHttpClient.Builder()
-            .connectTimeout(5, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
             .build()
     }
 }
