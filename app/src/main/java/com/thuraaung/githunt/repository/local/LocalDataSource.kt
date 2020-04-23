@@ -13,16 +13,12 @@ class LocalDataSource @Inject constructor(
     private val repoDao : TrendingRepoDao
 )  {
 
-    fun insertRepos(repoList: List<ModelRepo>) {
-        repoDao.insertRepos(repoList)
+    fun updateRepos(repos : List<ModelRepo>) {
+        repoDao.updateRepos(repos)
     }
 
     fun getAllRepos(): FlowTrendingRepos {
         return repoDao.getAllTrendingRepo()
-    }
-
-    suspend fun deleteAllRepos() {
-        repoDao.deleteAllRepo()
     }
 
     fun getAllLanguage() : FlowLanguages {

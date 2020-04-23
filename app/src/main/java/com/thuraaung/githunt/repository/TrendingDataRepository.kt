@@ -37,8 +37,7 @@ class TrendingDataRepository @Inject constructor(
 
             if(response.isSuccessful && result != null) {
 
-                clearOldData()
-                saveReposToLocal(result)
+                updateRepos(result)
 
             } else {
                 emit(
@@ -105,12 +104,8 @@ class TrendingDataRepository @Inject constructor(
         return localDataSource.getAllRepos()
     }
 
-    private suspend fun clearOldData() {
-        localDataSource.deleteAllRepos()
-    }
-
-    private fun saveReposToLocal(repoList : List<ModelRepo>) {
-        localDataSource.insertRepos(repoList)
+    private fun updateRepos(repos : List<ModelRepo>) {
+        localDataSource.updateRepos(repos)
     }
 
     private suspend fun getRemoteLanguages() : ResponseLanguages {

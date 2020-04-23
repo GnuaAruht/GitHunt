@@ -8,26 +8,33 @@ import com.thuraaung.githunt.utils.FlowTrendingRepos
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TrendingRepoDao {
+abstract class TrendingRepoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRepos(repoList : List<ModelRepo>)
-
-    @Query("SELECT * FROM ${ModelRepo.TABLE_NAME} order by stars desc")
-    fun getAllTrendingRepo() : FlowTrendingRepos
+    abstract fun insertRepos(repoList : List<ModelRepo>)
 
     @Query("DELETE FROM ${ModelRepo.TABLE_NAME}")
-    suspend fun deleteAllRepo()
+    abstract fun deleteAllRepo()
+
+    @Transaction
+    open fun updateRepos(repoList : List<ModelRepo>) {
+        deleteAllRepo()
+        insertRepos(repoList)
+    }
+
+    @Query("SELECT * FROM ${ModelRepo.TABLE_NAME} order by stars desc")
+    abstract fun getAllTrendingRepo() : FlowTrendingRepos
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertLanguages(language: List<ModelLanguage>)
+    abstract fun insertLanguages(language: List<ModelLanguage>)
 
     @Query("SELECT * FROM ${ModelLanguage.TABLE_NAME} order by name asc")
-    fun getAllLanguage() : FlowLanguages
+    abstract fun getAllLanguage() : FlowLanguages
 
     @Query("SELECT * FROM ${ModelLanguage.TABLE_NAME} where name like :name")
-    fun searchLanguage(name : String) : Flow<List<ModelLanguage>>
+    abstract fun searchLanguage(name : String) : Flow<List<ModelLanguage>>
 
     @Query("SELECT COUNT(*) FROM ${ModelLanguage.TABLE_NAME}")
-    fun getLanguageCount() : Int
+    abstract fun getLanguageCount() : Int
 }

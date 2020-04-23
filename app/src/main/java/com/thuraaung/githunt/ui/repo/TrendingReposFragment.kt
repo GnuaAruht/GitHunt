@@ -31,6 +31,10 @@ class TrendingReposFragment : BaseFragment() {
         RepoAdapter { repo -> Toast.makeText(context,"${repo.name}",Toast.LENGTH_SHORT).show() }
     }
 
+//    private val repoAdapter : MyAdapter by lazy {
+//        MyAdapter()
+//    }
+
     override val layoutRes: Int
         get() = R.layout.fragment_trending_repos
 
@@ -96,7 +100,8 @@ class TrendingReposFragment : BaseFragment() {
                 is ErrorState -> {
                     hideLoading()
                     Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
-//                    showErrorPlaceHolder()
+                    showErrorPlaceHolder()
+                    repoAdapter.updateItems(emptyList())
                 }
                 is SuccessState -> {
                     hideLoading()
