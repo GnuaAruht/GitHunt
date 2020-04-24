@@ -31,10 +31,6 @@ class TrendingReposFragment : BaseFragment() {
         RepoAdapter { repo -> Toast.makeText(context,"${repo.name}",Toast.LENGTH_SHORT).show() }
     }
 
-//    private val repoAdapter : MyAdapter by lazy {
-//        MyAdapter()
-//    }
-
     override val layoutRes: Int
         get() = R.layout.fragment_trending_repos
 
@@ -85,9 +81,6 @@ class TrendingReposFragment : BaseFragment() {
             setHasFixedSize(true)
         }
 
-        if (viewModel.reposList.value !is SuccessState)
-            viewModel.getTrendingRepos()
-
         swLayout.setOnRefreshListener {
             viewModel.getTrendingRepos()
         }
@@ -98,10 +91,9 @@ class TrendingReposFragment : BaseFragment() {
                     showLoading()
                 }
                 is ErrorState -> {
-                    hideLoading()
-                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
-                    showErrorPlaceHolder()
                     repoAdapter.updateItems(emptyList())
+                    showErrorPlaceHolder()
+                    hideLoading()
                 }
                 is SuccessState -> {
                     hideLoading()
@@ -123,7 +115,7 @@ class TrendingReposFragment : BaseFragment() {
     }
 
     private fun showErrorPlaceHolder() {
-        Toast.makeText(context,"Error ",Toast.LENGTH_SHORT).show()
+        Toast.makeText(context,"No Repo Found",Toast.LENGTH_SHORT).show()
     }
 
 }

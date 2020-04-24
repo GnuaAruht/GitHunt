@@ -31,24 +31,14 @@ class TrendingDataRepository @Inject constructor(
         emit(LoadingState<List<ModelRepo>>())
 
         try {
-
             val response = getRemoteRepos(language,filterBy)
             val result = response.body()
-
             if(response.isSuccessful && result != null) {
-
                 updateRepos(result)
-
-            } else {
-                emit(
-                    ErrorState<List<ModelRepo>>("Unknown Error")
-                )
             }
 
         } catch (e : Exception) {
-            emit(
-                ErrorState<List<ModelRepo>>("Cannot connect network")
-            )
+            e.printStackTrace()
         }
 
         emitAll(

@@ -23,6 +23,10 @@ class MainViewModel @Inject constructor(
     val languages : LiveData<ViewLanguages>
         get() = _languages
 
+    init {
+        getTrendingRepos()
+    }
+
     fun filterSinceBy(since_value : String) {
         if(context.savePreference(SINCE,since_value))
             getTrendingRepos()

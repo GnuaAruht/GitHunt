@@ -9,6 +9,7 @@
         app:showAsAction="ifRoom"/>
 
     <group
+        android:id="@+id/since_group"
         android:checkableBehavior="single">
 
         <item
