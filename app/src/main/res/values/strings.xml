@@ -19,8 +19,10 @@
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
     <string name="yearly">Yearly</string>
-    <string name="language">Language</string>
     <string name="search_language">Search Language</string>
     <string name="filter">Filter</string>
     <string name="monthly">Monthly</string>
+    <string name="language">Language</string>
+    <string name="stars">stars</string>
+    <string name="fork">Fork</string>
 </resources>

@@ -5,6 +5,7 @@
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
         <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>
         <item name="colorAccent">@color/colorSecondary</item>
+        <item name="android:windowLightStatusBar">true</item>
 
         <item name="android:colorBackground">@color/colorPrimary</item>
     </style>
