@@ -1,12 +1,17 @@
 package com.thuraaung.githunt.utils
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -67,3 +72,14 @@ fun TextView.setDrawableBackgroundColor(color: String) {
         }
     }
 }
+
+fun Activity.hideSoftKeyboard() {
+    if(currentFocus != null) {
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager
+            .hideSoftInputFromWindow(currentFocus!!.windowToken,0)
+    }
+}
+
+fun Fragment.getColorRes(@ColorRes id: Int) = ContextCompat.getColor(requireContext(), id)

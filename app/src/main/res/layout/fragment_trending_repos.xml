@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.repo.TrendingReposFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRepos"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/layout_repo_item"/>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/connectionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:visibility="gone"
+            android:background="@color/colorStatusConnected"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvConnection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_internet_connection"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRepos"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/connectionLayout"
+            tools:listitem="@layout/layout_repo_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

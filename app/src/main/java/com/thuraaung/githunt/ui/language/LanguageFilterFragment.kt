@@ -15,6 +15,7 @@ import com.thuraaung.githunt.R
 import com.thuraaung.githunt.utils.SuccessState
 import com.thuraaung.githunt.base.BaseFragment
 import com.thuraaung.githunt.ui.MainViewModel
+import com.thuraaung.githunt.utils.hideSoftKeyboard
 import kotlinx.android.synthetic.main.fragment_language_filter.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
@@ -29,7 +30,7 @@ class LanguageFilterFragment : BaseFragment() {
 
     private val languageAdapter : LanguageAdapter by lazy {
         LanguageAdapter { item ->
-            iActivity.hideSoftKeyboard()
+            requireActivity().hideSoftKeyboard()
             viewModel.filterLanguageBy(item.urlParam)
             viewModel.getLanguages()
             findNavController().popBackStack(R.id.trendingReposFragment,false)

@@ -1,5 +1,7 @@
 package com.thuraaung.githunt.ui.repo
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -10,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thuraaung.githunt.R
 import com.thuraaung.githunt.base.BaseFragment
@@ -76,9 +79,9 @@ class TrendingReposFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rvRepos.apply {
-            layoutManager = LinearLayoutManager(context)
             adapter = repoAdapter
-            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context,LinearLayoutManager.HORIZONTAL))
         }
 
         swLayout.setOnRefreshListener {
@@ -98,6 +101,40 @@ class TrendingReposFragment : BaseFragment() {
                 is SuccessState -> {
                     hideLoading()
                     repoAdapter.updateItems(it.data)
+                }
+            }
+        })
+
+        NetworkUtils.getNetworkLiveData(requireContext()).observe(viewLifecycleOwner, Observer { isConnected ->
+
+            if (!isConnected) {
+
+                connectionLayout.apply {
+                    alpha = 0f
+                    show()
+                    setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
+                    animate()
+                        .alpha(1f)
+                        .setDuration(ANIMATION_DURATION)
+                        .setListener(null)
+                }
+            }
+            else {
+
+                tvConnection.text = getString(R.string.internet_connected)
+                connectionLayout.apply {
+
+                    setBackgroundColor(getColorRes(R.color.colorStatusConnected))
+                    animate()
+                        .alpha(0f)
+                        .setStartDelay(ANIMATION_DURATION)
+                        .setDuration(ANIMATION_DURATION)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                hide()
+                            }
+                        })
+
                 }
             }
         })
