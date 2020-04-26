@@ -109,6 +109,7 @@ class TrendingReposFragment : BaseFragment() {
 
             if (!isConnected) {
 
+                tvConnection.text = getString(R.string.internet_disconnected)
                 connectionLayout.apply {
                     alpha = 0f
                     show()

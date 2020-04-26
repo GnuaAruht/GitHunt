@@ -16,7 +16,7 @@
     <string name="language">Language</string>
     <string name="stars">stars</string>
     <string name="fork">Fork</string>
-    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="internet_disconnected">Internet Disconnected</string>
     <string name="internet_connected">Internet Connected</string>
 
 </resources>
