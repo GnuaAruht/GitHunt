@@ -8,14 +8,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.thuraaung.githunt.utils.ErrorState
-import com.thuraaung.githunt.utils.LoadingState
 import com.thuraaung.githunt.R
-import com.thuraaung.githunt.utils.SuccessState
 import com.thuraaung.githunt.base.BaseFragment
 import com.thuraaung.githunt.ui.MainViewModel
-import com.thuraaung.githunt.utils.hideSoftKeyboard
+import com.thuraaung.githunt.utils.*
 import kotlinx.android.synthetic.main.fragment_language_filter.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
