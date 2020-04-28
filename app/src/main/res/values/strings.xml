@@ -18,5 +18,7 @@
     <string name="fork">Fork</string>
     <string name="internet_disconnected">Internet Disconnected</string>
     <string name="internet_connected">Internet Connected</string>
+    <string name="no_repo_found">No Repo Found</string>
+    <string name="no_language_found">No Language Found</string>
 
 </resources>

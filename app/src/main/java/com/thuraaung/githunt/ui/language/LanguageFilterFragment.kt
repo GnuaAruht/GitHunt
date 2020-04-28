@@ -53,13 +53,17 @@ class LanguageFilterFragment : BaseFragment() {
         viewModel.languages.observe(viewLifecycleOwner, Observer {
             when(it) {
                 is LoadingState -> {
-                    Toast.makeText(context,"Loading",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context,"Loading",Toast.LENGTH_SHORT).show()
                 }
                 is ErrorState -> {
-                    Toast.makeText(context,"No Data",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context,"No Data",Toast.LENGTH_SHORT).show()
+                    tvNoLanguage.show()
+                    rvLanguage.hide()
                     languageAdapter.updateItems(emptyList())
                 }
                 is SuccessState -> {
+                    tvNoLanguage.hide()
+                    rvLanguage.show()
                     languageAdapter.updateItems(it.data)
                 }
             }

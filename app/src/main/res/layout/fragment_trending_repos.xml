@@ -16,9 +16,9 @@
             android:id="@+id/connectionLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="4dp"
             android:visibility="gone"
-            android:background="@color/colorStatusConnected"
+            android:background="@color/colorStatusNotConnected"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -42,6 +42,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/connectionLayout"
             tools:listitem="@layout/layout_repo_item" />
+
+        <TextView
+            android:id="@+id/tvNoRepo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="@string/no_repo_found"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/connectionLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

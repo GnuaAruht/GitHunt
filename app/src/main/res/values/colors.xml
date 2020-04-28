@@ -13,7 +13,7 @@
     <color name="colorGreen800">#31b057</color>
     <color name="colorGreen100">#4431b057</color>
 
-    <color name="colorStatusConnected">#43A047</color>
+    <color name="colorStatusConnected">#39CD40</color>
     <color name="colorStatusNotConnected">#D32F2F</color>
 
 </resources>

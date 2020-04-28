@@ -145,6 +145,7 @@ class TrendingReposFragment : BaseFragment() {
     private fun showLoading() {
         swLayout.isRefreshing = true
         rvRepos.hide()
+        tvNoRepo.hide()
     }
 
     private fun hideLoading() {
@@ -153,7 +154,8 @@ class TrendingReposFragment : BaseFragment() {
     }
 
     private fun showErrorPlaceHolder() {
-        Toast.makeText(context,"No Repo Found",Toast.LENGTH_SHORT).show()
+        tvNoRepo.show()
+        rvRepos.hide()
     }
 
 }
