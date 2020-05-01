@@ -1,4 +1,4 @@
-package com.thuraaung.githunt.ui.repo
+package com.thuraaung.githunt.ui.repo.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import com.thuraaung.githunt.model.ModelRepo
 import com.thuraaung.githunt.utils.listen
 
 
-class RepoAdapter(private val itemClickCallback : (repo : ModelRepo) -> Unit) : BaseAdapter<ModelRepo,RepoViewHolder>() {
+class RepoAdapter(private val itemClickCallback : (repo : ModelRepo) -> Unit) : BaseAdapter<ModelRepo, RepoViewHolder>() {
 
     override val diffUtilCallback: DiffUtilCallback<ModelRepo>
         get() = languageUtilCallback
@@ -17,7 +17,8 @@ class RepoAdapter(private val itemClickCallback : (repo : ModelRepo) -> Unit) : 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_repo_item,parent,false)
-        return RepoViewHolder(view).listen { position ->
+        return RepoViewHolder(view)
+            .listen { position ->
             itemClickCallback.invoke(itemList[position])
         }
     }

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dagger.android.support.AndroidSupportInjection
-import java.lang.ClassCastException
 
 abstract class BaseFragment : Fragment() {
 

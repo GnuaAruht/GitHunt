@@ -1,4 +1,4 @@
-package com.thuraaung.githunt.ui.repo
+package com.thuraaung.githunt.ui.repo.list
 
 import android.view.View
 import android.widget.ImageView

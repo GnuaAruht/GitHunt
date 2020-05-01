@@ -27,7 +27,7 @@ class MainViewModel @Inject constructor(
         getTrendingRepos()
     }
 
-    fun filterSinceBy(since_value : String) {
+    fun filterBySince(since_value : String) {
         if(context.savePreference(SINCE,since_value))
             getTrendingRepos()
     }

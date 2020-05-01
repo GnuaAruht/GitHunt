@@ -1,4 +1,4 @@
-package com.thuraaung.githunt.ui.repo
+package com.thuraaung.githunt.ui.repo.list
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -12,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thuraaung.githunt.R
 import com.thuraaung.githunt.base.BaseFragment
@@ -31,7 +30,13 @@ class TrendingReposFragment : BaseFragment() {
     private val viewModel : MainViewModel by activityViewModels { viewModelFactory }
 
     private val repoAdapter: RepoAdapter by lazy {
-        RepoAdapter { repo -> Toast.makeText(context,"${repo.name}",Toast.LENGTH_SHORT).show() }
+        RepoAdapter { repo ->
+            Toast.makeText(
+                context,
+                repo.name,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override val layoutRes: Int
@@ -51,21 +56,21 @@ class TrendingReposFragment : BaseFragment() {
 
         return when(item.itemId) {
             R.id.action_filter -> {
-                findNavController().navigate(R.id.action_trendingReposFragment_to_repoFilterFragment)
+                findNavController().navigate(R.id.action_trendingRepos_to_languageFilter)
                 true
             }
             R.id.action_daily -> {
-                viewModel.filterSinceBy(SINCE_DAILY)
+                viewModel.filterBySince(SINCE_DAILY)
                 item.isChecked = !item.isChecked
                 true
             }
             R.id.action_weekly -> {
-                viewModel.filterSinceBy(SINCE_WEEKLY)
+                viewModel.filterBySince(SINCE_WEEKLY)
                 item.isChecked = !item.isChecked
                 true
             }
             R.id.action_monthly -> {
-                viewModel.filterSinceBy(SINCE_MONTHLY)
+                viewModel.filterBySince(SINCE_MONTHLY)
                 item.isChecked = !item.isChecked
                 true
             }
