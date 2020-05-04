@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,14 +28,8 @@ class TrendingReposFragment : BaseFragment() {
 
     private val viewModel : MainViewModel by activityViewModels { viewModelFactory }
 
-    private val repoAdapter: RepoAdapter by lazy {
-        RepoAdapter { repo ->
-            Toast.makeText(
-                context,
-                repo.name,
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+    private val repoAdapter : RepoAdapter by lazy {
+        RepoAdapter()
     }
 
     override val layoutRes: Int
@@ -81,10 +74,6 @@ class TrendingReposFragment : BaseFragment() {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -111,6 +100,7 @@ class TrendingReposFragment : BaseFragment() {
                 is SuccessState -> {
                     hideLoading()
                     repoAdapter.updateItems(it.data)
+                    rvRepos.scheduleLayoutAnimation()
                 }
             }
         })

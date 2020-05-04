@@ -41,7 +41,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/connectionLayout"
-            tools:listitem="@layout/layout_repo_item" />
+            tools:listitem="@layout/layout_repo_item"
+            android:layoutAnimation="@anim/layout_anim_fall_down"/>
 
         <TextView
             android:id="@+id/tvNoRepo"
