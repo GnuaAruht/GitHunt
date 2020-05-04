@@ -1,4 +1,4 @@
-package com.thuraaung.githunt.ui.repo.list
+package com.thuraaung.githunt.ui.repo
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -45,6 +45,7 @@ class TrendingReposFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        findNavController().navigate(R.id.action_trendingRepos_to_splashScreen)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -78,6 +79,10 @@ class TrendingReposFragment : BaseFragment() {
                 super.onOptionsItemSelected(item)
         }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

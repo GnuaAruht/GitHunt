@@ -1,6 +1,7 @@
 package com.thuraaung.githunt.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -8,7 +9,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.thuraaung.githunt.R
+import com.thuraaung.githunt.utils.hide
 import com.thuraaung.githunt.utils.hideSoftKeyboard
+import com.thuraaung.githunt.utils.show
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -24,6 +27,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         navController = findNavController(R.id.nav_host_frag)
+        navController.addOnDestinationChangedListener { _, des, _ ->
+            if (des.id == R.id.splashScreenFragment)
+                toolbar.hide()
+            else
+                toolbar.show()
+        }
         appConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController,appConfiguration)
 

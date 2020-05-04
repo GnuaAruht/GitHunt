@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/trendingReposFragment"
-        android:name="com.thuraaung.githunt.ui.repo.list.TrendingReposFragment"
+        android:name="com.thuraaung.githunt.ui.repo.TrendingReposFragment"
         android:label="Github Trending Repos"
         tools:layout="@layout/fragment_trending_repos" >
 
@@ -16,14 +16,16 @@
             app:destination="@id/languageFilterFragment" />
 
         <action
-            android:id="@+id/action_trendingRepos_to_repoDetail"
-            app:destination="@id/repoDetailFragment" />
-
-        <action
             android:id="@+id/action_trendingRepos_to_splashScreen"
             app:destination="@id/splashScreenFragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.thuraaung.githunt.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" />
 
     <fragment
         android:id="@+id/languageFilterFragment"
@@ -31,16 +33,5 @@
         android:label="Filter Language"
         tools:layout="@layout/fragment_language_filter" />
 
-    <fragment
-        android:id="@+id/repoDetailFragment"
-        android:name="com.thuraaung.githunt.ui.repo.detail.RepoDetailFragment"
-        android:label="fragment_repo_detail"
-        tools:layout="@layout/fragment_repo_detail" />
-
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.thuraaung.githunt.SplashScreenFragment"
-        android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.thuraaung.githunt.ui.repo.list
+package com.thuraaung.githunt.ui.repo
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
