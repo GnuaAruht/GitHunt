@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/internet_disconnected"
+                android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"/>
 

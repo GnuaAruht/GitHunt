@@ -6,7 +6,7 @@
         android:duration="1500"
         android:propertyName="translationY"
         android:valueTo="0"
-        android:valueFrom="100"
+        android:valueFrom="150"
         android:valueType="floatType" />
 
     <objectAnimator

@@ -65,6 +65,7 @@ class LanguageFilterFragment : BaseFragment() {
                     tvNoLanguage.hide()
                     rvLanguage.show()
                     languageAdapter.updateItems(it.data)
+                    rvLanguage.scheduleLayoutAnimation()
                 }
             }
         })
