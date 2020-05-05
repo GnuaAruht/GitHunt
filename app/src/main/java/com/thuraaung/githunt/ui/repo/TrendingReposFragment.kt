@@ -80,7 +80,7 @@ class TrendingReposFragment : BaseFragment() {
         rvRepos.apply {
             adapter = repoAdapter
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(ListItemDecoration(context,10, 10))
+//            addItemDecoration(ListItemDecoration(context,10, 10))
         }
 
         swLayout.setOnRefreshListener {
