@@ -1,10 +1,10 @@
 # GitHunt
 Show Most Trending Repos On Github
 
-## Android app to show the most trending repositories on Github
+## An kotlin android app to show the most trending repositories on Github
 
 ## Technologies used
-* Kotlin
+* MVVM
 * Dagger2
 * Retrofit
 * Moshi 
