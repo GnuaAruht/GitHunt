@@ -13,11 +13,11 @@
 
         <action
             android:id="@+id/action_trendingRepos_to_languageFilter"
-            app:destination="@id/languageFilterFragment" />
-
-        <action
-            android:id="@+id/action_trendingRepos_to_splashScreen"
-            app:destination="@id/splashScreenFragment" />
+            app:destination="@id/languageFilterFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     </fragment>
 

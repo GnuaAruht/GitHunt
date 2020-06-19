@@ -38,7 +38,6 @@ class TrendingReposFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        findNavController().navigate(R.id.action_trendingRepos_to_splashScreen)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
