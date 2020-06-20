@@ -13,6 +13,6 @@ typealias ResponseLanguages = Response<List<ModelLanguage>>
 
 typealias FlowLanguages = Flow<List<ModelLanguage>>
 
-typealias ViewTrendingRepos = ViewState<List<ModelRepo>>
+typealias ViewTrendingRepos = DataState<List<ModelRepo>>
 
-typealias ViewLanguages = ViewState<List<ModelLanguage>>
+typealias ViewLanguages = DataState<List<ModelLanguage>>
