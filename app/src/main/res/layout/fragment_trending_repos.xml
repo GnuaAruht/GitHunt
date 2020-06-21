@@ -46,33 +46,36 @@
 
             <RadioButton
                 android:id="@+id/rb_daily"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_widget_background"
+                android:text="@string/daily"
                 android:button="@null"
                 android:gravity="center"
-                android:text="@string/daily" />
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:background="@drawable/toggle_widget_background"/>
 
             <RadioButton
                 android:id="@+id/rb_weekly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="@string/weekly"
                 android:layout_weight="1"
-                android:background="@drawable/toggle_widget_background"
                 android:button="@null"
                 android:gravity="center"
-                android:text="@string/weekly" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_widget_background"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
 
             <RadioButton
                 android:id="@+id/rb_monthly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="@string/monthly"
                 android:layout_weight="1"
-                android:background="@drawable/toggle_widget_background"
                 android:button="@null"
                 android:gravity="center"
-                android:text="@string/monthly" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_widget_background"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
 
         </RadioGroup>
 
@@ -88,14 +91,14 @@
             app:layout_constraintTop_toBottomOf="@+id/radioGroup"
             tools:listitem="@layout/layout_repo_item" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvNoRepo"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/no_repo_found"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:layout_marginTop="4dp"
             android:visibility="gone"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
