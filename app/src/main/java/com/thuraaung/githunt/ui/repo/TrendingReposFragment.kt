@@ -104,40 +104,40 @@ class TrendingReposFragment : BaseFragment() {
             }
         })
 
-        NetworkUtils.getNetworkLiveData(requireContext()).observe(viewLifecycleOwner, Observer { isConnected ->
-
-            if (!isConnected) {
-
-                tvConnection.text = getString(R.string.internet_disconnected)
-                connectionLayout.apply {
-                    alpha = 0f
-                    show()
-                    setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
-                    animate()
-                        .alpha(1f)
-                        .setDuration(ANIMATION_DURATION)
-                        .setListener(null)
-                }
-            }
-            else {
-
-                tvConnection.text = getString(R.string.internet_connected)
-                connectionLayout.apply {
-
-                    setBackgroundColor(getColorRes(R.color.colorStatusConnected))
-                    animate()
-                        .alpha(0f)
-                        .setStartDelay(ANIMATION_DURATION)
-                        .setDuration(ANIMATION_DURATION)
-                        .setListener(object : AnimatorListenerAdapter() {
-                            override fun onAnimationEnd(animation: Animator) {
-                                hide()
-                            }
-                        })
-
-                }
-            }
-        })
+//        NetworkUtils.getNetworkLiveData(requireContext()).observe(viewLifecycleOwner, Observer { isConnected ->
+//
+//            if (!isConnected) {
+//
+//                tvConnection.text = getString(R.string.internet_disconnected)
+//                connectionLayout.apply {
+//                    alpha = 0f
+//                    show()
+//                    setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
+//                    animate()
+//                        .alpha(1f)
+//                        .setDuration(ANIMATION_DURATION)
+//                        .setListener(null)
+//                }
+//            }
+//            else {
+//
+//                tvConnection.text = getString(R.string.internet_connected)
+//                connectionLayout.apply {
+//
+//                    setBackgroundColor(getColorRes(R.color.colorStatusConnected))
+//                    animate()
+//                        .alpha(0f)
+//                        .setStartDelay(ANIMATION_DURATION)
+//                        .setDuration(ANIMATION_DURATION)
+//                        .setListener(object : AnimatorListenerAdapter() {
+//                            override fun onAnimationEnd(animation: Animator) {
+//                                hide()
+//                            }
+//                        })
+//
+//                }
+//            }
+//        })
 
     }
 

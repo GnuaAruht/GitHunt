@@ -13,51 +13,93 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/connectionLayout"
+<!--        <LinearLayout-->
+<!--            android:id="@+id/connectionLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/colorStatusNotConnected"-->
+<!--            android:padding="4dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvConnection"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/internet_disconnected"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="18sp" />-->
+
+<!--        </LinearLayout>-->
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:visibility="gone"
-            android:background="@color/colorStatusNotConnected"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/primary_color_outline"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tvConnection"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/rb_daily"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/internet_disconnected"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
                 android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"/>
+                android:text="@string/daily" />
 
-        </LinearLayout>
+            <RadioButton
+                android:id="@+id/rb_weekly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/weekly" />
+
+            <RadioButton
+                android:id="@+id/rb_monthly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/monthly" />
+
+        </RadioGroup>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRepos"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layoutAnimation="@anim/layout_anim_fall_down"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/connectionLayout"
-            tools:listitem="@layout/layout_repo_item"
-            android:layoutAnimation="@anim/layout_anim_fall_down"/>
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+            tools:listitem="@layout/layout_repo_item" />
 
         <TextView
             android:id="@+id/tvNoRepo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="@string/no_repo_found"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/connectionLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

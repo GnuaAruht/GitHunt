@@ -10,6 +10,7 @@
     <color name="colorOnSecondary">#000000</color>
 
     <color name="colorBackground">#e0e0e0</color>
+    <color name="transparent">#00ffffff</color>
 
 <!--    <color name="colorPrimary">#ffffff</color>-->
 <!--    <color name="colorPrimaryVariant">#ffffff</color>-->
