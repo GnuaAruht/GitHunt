@@ -1,8 +1,8 @@
-package com.thuraaung.githunt.ui
+package com.thuraaung.githunt.ui.repo
 
 import android.content.Context
 import androidx.lifecycle.*
-import com.thuraaung.githunt.repository.TrendingDataRepository
+import com.thuraaung.githunt.repository.DataRepository
 import com.thuraaung.githunt.utils.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -11,17 +11,14 @@ import javax.inject.Inject
 
 
 @ExperimentalCoroutinesApi
-class MainViewModel @Inject constructor(
+class RepoViewModel @Inject constructor(
         private val context: Context,
-        private val repository: TrendingDataRepository) : ViewModel() {
+        private val repository: DataRepository) : ViewModel() {
 
     private val _reposList = MutableLiveData<ViewTrendingRepos>()
     val reposList : LiveData<ViewTrendingRepos>
         get() = _reposList
 
-    private val _languages = MutableLiveData<ViewLanguages>()
-    val languages : LiveData<ViewLanguages>
-        get() = _languages
 
     init {
         getTrendingRepos()
@@ -50,11 +47,5 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getLanguages(name : String = "%") {
-        viewModelScope.launch {
-            repository.getLanuages(name).collect {
-                _languages.postValue(it)
-            }
-        }
-    }
+
 }

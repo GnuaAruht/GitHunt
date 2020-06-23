@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class TrendingDataRepository @Inject constructor(
+class DataRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) {

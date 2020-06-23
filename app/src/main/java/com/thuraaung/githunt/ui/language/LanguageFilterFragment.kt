@@ -2,17 +2,15 @@ package com.thuraaung.githunt.ui.language
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thuraaung.githunt.R
 import com.thuraaung.githunt.base.BaseFragment
-import com.thuraaung.githunt.ui.MainViewModel
+import com.thuraaung.githunt.ui.repo.RepoViewModel
 import com.thuraaung.githunt.utils.*
 import kotlinx.android.synthetic.main.fragment_language_filter.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,13 +22,14 @@ class LanguageFilterFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
 
-    private val viewModel : MainViewModel by activityViewModels { viewModelFactory }
+    private val languageViewModel : LanguageViewModel by activityViewModels { viewModelFactory }
+    private val repoViewModel : RepoViewModel by activityViewModels { viewModelFactory }
 
     private val languageAdapter : LanguageAdapter by lazy {
         LanguageAdapter { item ->
             requireActivity().hideSoftKeyboard()
-            viewModel.filterLanguageBy(item.urlParam)
-            viewModel.getLanguages()
+            repoViewModel.filterLanguageBy(item.urlParam)
+            languageViewModel.getLanguages()
             findNavController().popBackStack(R.id.trendingReposFragment,false)
         }
     }
@@ -47,10 +46,10 @@ class LanguageFilterFragment : BaseFragment() {
             adapter = languageAdapter
         }
 
-        if(viewModel.languages.value !is SuccessState)
-            viewModel.getLanguages()
+        if(languageViewModel.languages.value !is SuccessState)
+            languageViewModel.getLanguages()
 
-        viewModel.languages.observe(viewLifecycleOwner, Observer {
+        languageViewModel.languages.observe(viewLifecycleOwner, Observer {
             when(it) {
                 is LoadingState -> {
 //                    Toast.makeText(context,"Loading",Toast.LENGTH_SHORT).show()
@@ -73,12 +72,12 @@ class LanguageFilterFragment : BaseFragment() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.getLanguages(if(query != null) "$query%" else "%")
+                languageViewModel.getLanguages(if(query != null) "$query%" else "%")
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.getLanguages(if(newText != null) "$newText%" else "%")
+                languageViewModel.getLanguages(if(newText != null) "$newText%" else "%")
                 return true
             }
         })

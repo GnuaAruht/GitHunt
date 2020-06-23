@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thuraaung.githunt.R
 import com.thuraaung.githunt.base.BaseFragment
-import com.thuraaung.githunt.ui.MainViewModel
 import com.thuraaung.githunt.utils.*
 import kotlinx.android.synthetic.main.fragment_trending_repos.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,7 +25,7 @@ class TrendingReposFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
 
-    private val viewModel : MainViewModel by activityViewModels { viewModelFactory }
+    private val viewModel : RepoViewModel by activityViewModels { viewModelFactory }
 
     private val repoAdapter : RepoAdapter by lazy {
         RepoAdapter()
@@ -104,40 +103,40 @@ class TrendingReposFragment : BaseFragment() {
             }
         })
 
-//        NetworkUtils.getNetworkLiveData(requireContext()).observe(viewLifecycleOwner, Observer { isConnected ->
-//
-//            if (!isConnected) {
-//
-//                tvConnection.text = getString(R.string.internet_disconnected)
-//                connectionLayout.apply {
-//                    alpha = 0f
-//                    show()
-//                    setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
-//                    animate()
-//                        .alpha(1f)
-//                        .setDuration(ANIMATION_DURATION)
-//                        .setListener(null)
-//                }
-//            }
-//            else {
-//
-//                tvConnection.text = getString(R.string.internet_connected)
-//                connectionLayout.apply {
-//
-//                    setBackgroundColor(getColorRes(R.color.colorStatusConnected))
-//                    animate()
-//                        .alpha(0f)
-//                        .setStartDelay(ANIMATION_DURATION)
-//                        .setDuration(ANIMATION_DURATION)
-//                        .setListener(object : AnimatorListenerAdapter() {
-//                            override fun onAnimationEnd(animation: Animator) {
-//                                hide()
-//                            }
-//                        })
-//
-//                }
-//            }
-//        })
+        NetworkUtils.getNetworkLiveData(requireContext()).observe(viewLifecycleOwner, Observer { isConnected ->
+
+            if (!isConnected) {
+
+                tvConnection.text = getString(R.string.internet_disconnected)
+                connectionLayout.apply {
+                    alpha = 0f
+                    show()
+                    setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
+                    animate()
+                        .alpha(1f)
+                        .setDuration(ANIMATION_DURATION)
+                        .setListener(null)
+                }
+            }
+            else {
+
+                tvConnection.text = getString(R.string.internet_connected)
+                connectionLayout.apply {
+
+                    setBackgroundColor(getColorRes(R.color.colorStatusConnected))
+                    animate()
+                        .alpha(0f)
+                        .setStartDelay(ANIMATION_DURATION)
+                        .setDuration(ANIMATION_DURATION)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                hide()
+                            }
+                        })
+
+                }
+            }
+        })
 
     }
 
