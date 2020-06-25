@@ -17,7 +17,7 @@ class RepoViewModel @Inject constructor(
     private val repository: DataRepository
 ) : ViewModel() {
 
-    private val _repoDataState = MutableLiveData<ViewTrendingRepos>()
+    private val _repoDataState = MutableLiveData<StateTrendingRepos>()
 
     private val repoList: LiveData<List<ModelRepo>>
         get() = Transformations.map(_repoDataState) {
@@ -34,7 +34,7 @@ class RepoViewModel @Inject constructor(
 
     val isError: LiveData<Boolean>
         get() = Transformations.map(_repoDataState) {
-            ( it is ErrorState ) && ( it !is LoadingState)
+            ( it is ErrorState ) || ( it !is LoadingState)
         }
 
     val isEmpty : LiveData<Boolean>
@@ -43,9 +43,13 @@ class RepoViewModel @Inject constructor(
         }
 
     var listUpdateCallback : (() -> Unit)? = null
+    var itemClickCallback : ((ModelRepo) -> Unit)? = null
     private var observer: Observer<List<ModelRepo>>
-    val repoAdapter = RepoAdapter().apply {
+    private val adapter = RepoAdapter().apply {
 
+        repoClickListener = { repo ->
+            itemClickCallback?.invoke(repo)
+        }
         observer = Observer<List<ModelRepo>> { list ->
             updateItems(list)
             listUpdateCallback?.invoke()
@@ -66,6 +70,10 @@ class RepoViewModel @Inject constructor(
     fun filterLanguageBy(language_value: String) {
         if (context.savePreference(LANGUAGE, language_value))
             getTrendingRepos()
+    }
+
+    fun getRepoAdapter() : RepoAdapter {
+        return adapter
     }
 
     fun getTrendingRepos() {

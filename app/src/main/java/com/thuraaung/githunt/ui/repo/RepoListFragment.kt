@@ -15,7 +15,6 @@ import com.thuraaung.githunt.R
 import com.thuraaung.githunt.databinding.FragmentTrendingReposBinding
 import com.thuraaung.githunt.utils.*
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_trending_repos.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
@@ -91,7 +90,7 @@ class RepoListFragment : Fragment() {
             binding.rvRepos.scheduleLayoutAnimation()
         }
 
-        viewModel.repoAdapter.itemClickListener = {
+        viewModel.itemClickCallback = {
             findNavController().navigate(R.id.action_trendingRepos_to_repoDetail)
         }
 
@@ -100,8 +99,8 @@ class RepoListFragment : Fragment() {
 
                 if (!isConnected) {
 
-                    tvConnection.text = getString(R.string.internet_disconnected)
-                    connectionLayout.apply {
+                    binding.tvConnection.text = getString(R.string.internet_disconnected)
+                    binding.connectionLayout.apply {
                         alpha = 0f
                         show()
                         setBackgroundColor(getColorRes(R.color.colorStatusNotConnected))
@@ -112,8 +111,8 @@ class RepoListFragment : Fragment() {
                     }
                 } else {
 
-                    tvConnection.text = getString(R.string.internet_connected)
-                    connectionLayout.apply {
+                    binding.tvConnection.text = getString(R.string.internet_connected)
+                    binding.connectionLayout.apply {
 
                         setBackgroundColor(getColorRes(R.color.colorStatusConnected))
                         animate()
@@ -132,20 +131,20 @@ class RepoListFragment : Fragment() {
 
     }
 
-    private fun showLoading() {
-        swLayout.isRefreshing = true
-        rvRepos.hide()
-//        tvNoRepo.hide()
-    }
-
-    private fun hideLoading() {
-        swLayout.isRefreshing = false
-        rvRepos.show()
-    }
-
-    private fun showErrorPlaceHolder() {
-//        tvNoRepo.show()
-        rvRepos.hide()
-    }
+//    private fun showLoading() {
+//        swLayout.isRefreshing = true
+//        rvRepos.hide()
+////        tvNoRepo.hide()
+//    }
+//
+//    private fun hideLoading() {
+//        swLayout.isRefreshing = false
+//        rvRepos.show()
+//    }
+//
+//    private fun showErrorPlaceHolder() {
+////        tvNoRepo.show()
+//        rvRepos.hide()
+//    }
 
 }

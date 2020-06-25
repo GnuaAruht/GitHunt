@@ -11,13 +11,13 @@ import com.thuraaung.githunt.model.ModelRepo
 class RepoAdapter : RecyclerView.Adapter<RepoAdapter.MyViewHolder>() {
 
     private val itemList = mutableListOf<ModelRepo>()
-    var itemClickListener : ((ModelRepo) -> Unit)? = null
+    var repoClickListener : ((ModelRepo) -> Unit)? = null
 
     inner class MyViewHolder(private val binding : LayoutRepoItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
-                itemClickListener?.invoke(itemList[adapterPosition])
+                repoClickListener?.invoke(itemList[adapterPosition])
             }
         }
 
