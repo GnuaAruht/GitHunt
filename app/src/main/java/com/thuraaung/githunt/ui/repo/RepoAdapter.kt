@@ -1,40 +1,29 @@
 package com.thuraaung.githunt.ui.repo
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.thuraaung.githunt.R
+import com.thuraaung.githunt.databinding.LayoutRepoItemBinding
 import com.thuraaung.githunt.model.ModelRepo
-import com.thuraaung.githunt.utils.loadImage
-import com.thuraaung.githunt.utils.setDrawableBackgroundColor
 
 class RepoAdapter : RecyclerView.Adapter<RepoAdapter.MyViewHolder>() {
 
     private val itemList = mutableListOf<ModelRepo>()
+    var itemClickListener : ((ModelRepo) -> Unit)? = null
 
-    inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
+    inner class MyViewHolder(private val binding : LayoutRepoItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val tvRepoName : TextView = view.findViewById(R.id.tv_repo_name)
-        private val tvAuthor : TextView = view.findViewById(R.id.tv_author)
-        private val tvLanguage : TextView = view.findViewById(R.id.tvLanguage)
-        private val tvStar : TextView = view.findViewById(R.id.tvStar)
-        private val tvFork : TextView = view.findViewById(R.id.tvFork)
-
-        private val imgAvatar : ImageView = view.findViewById(R.id.img_avator)
-
-        fun bind(item: ModelRepo) {
-            tvRepoName.text = item.name
-            tvAuthor.text = item.author
-            tvLanguage.text = item.language
-            item.languageColor?.let {
-                tvLanguage.setDrawableBackgroundColor(item.languageColor)
+        init {
+            binding.root.setOnClickListener {
+                itemClickListener?.invoke(itemList[adapterPosition])
             }
-            tvStar.text = item.stars.toString()
-            tvFork.text = item.forks.toString()
-            imgAvatar.loadImage(item.avatar)
+        }
+
+        fun bind(repo : ModelRepo) {
+            binding.repo = repo
+            binding.executePendingBindings()
         }
     }
 
@@ -45,9 +34,9 @@ class RepoAdapter : RecyclerView.Adapter<RepoAdapter.MyViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_repo_item,parent,false)
-        return MyViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<LayoutRepoItemBinding>(inflater,R.layout.layout_repo_item,parent,false)
+        return MyViewHolder(binding)
     }
 
     override fun getItemCount(): Int = itemList.size

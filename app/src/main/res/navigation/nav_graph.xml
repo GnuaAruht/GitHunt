@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/trendingReposFragment"
-        android:name="com.thuraaung.githunt.ui.repo.TrendingReposFragment"
+        android:name="com.thuraaung.githunt.ui.repo.RepoListFragment"
         android:label="Github Trending Repos"
         tools:layout="@layout/fragment_trending_repos" >
 
@@ -19,19 +19,28 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+        <action
+            android:id="@+id/action_trendingRepos_to_repoDetail"
+            app:destination="@id/repoDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"  />
+
     </fragment>
 
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.thuraaung.githunt.SplashScreenFragment"
-        android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" />
 
     <fragment
         android:id="@+id/languageFilterFragment"
         android:name="com.thuraaung.githunt.ui.language.LanguageFilterFragment"
         android:label="Filter Language"
         tools:layout="@layout/fragment_language_filter" />
+
+    <fragment
+        android:id="@+id/repoDetailFragment"
+        android:name="com.thuraaung.githunt.ui.detail.RepoDetailFragment"
+        android:label="Repository Detail"
+        tools:layout="@layout/fragment_repo_detail" />
 
 
 </navigation>

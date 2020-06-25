@@ -1,66 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="4dp"
-    tools:context=".ui.repo.TrendingReposFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.thuraaung.githunt.ui.repo.RepoViewModel" />
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swLayout"
+        android:padding="4dp"
+        app:refreshing="@{ viewModel.isLoading }"
+        app:onRefreshListener="@{() -> viewModel.getTrendingRepos() }"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.repo.RepoListFragment">
 
-        <LinearLayout
-            android:id="@+id/connectionLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorStatusNotConnected"
-            android:padding="4dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvConnection"
+            <LinearLayout
+                android:id="@+id/connectionLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/internet_disconnected"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:background="@color/colorStatusNotConnected"
+                android:padding="4dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvConnection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/internet_disconnected"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRepos"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="4dp"
-            android:layoutAnimation="@anim/layout_anim_fall_down"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/connectionLayout"
-            tools:listitem="@layout/layout_repo_item" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRepos"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                app:adapter="@{ viewModel.repoAdapter }"
+                android:layoutAnimation="@anim/layout_anim_fall_down"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/connectionLayout"
+                tools:listitem="@layout/layout_repo_item" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvNoRepo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/no_repo_found"
-            android:layout_marginTop="4dp"
-            android:visibility="gone"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/connectionLayout" />
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/tvNoRepo"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/no_repo_found"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:visibility="@{ ( viewModel.isError || viewModel.isEmpty ) ? View.VISIBLE : View.GONE }"-->
+<!--                app:loading="@{ viewModel.isLoading }"-->
+<!--                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/connectionLayout" />-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

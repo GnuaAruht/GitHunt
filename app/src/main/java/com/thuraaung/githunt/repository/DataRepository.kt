@@ -1,22 +1,13 @@
 package com.thuraaung.githunt.repository
 
-import com.thuraaung.githunt.utils.ErrorState
-import com.thuraaung.githunt.utils.LoadingState
-import com.thuraaung.githunt.utils.SuccessState
 import com.thuraaung.githunt.model.ModelLanguage
 import com.thuraaung.githunt.model.ModelRepo
 import com.thuraaung.githunt.repository.local.LocalDataSource
 import com.thuraaung.githunt.repository.remote.RemoteDataSource
-import com.thuraaung.githunt.utils.FlowLanguages
-import com.thuraaung.githunt.utils.FlowTrendingRepos
-import com.thuraaung.githunt.utils.ResponseLanguages
-import com.thuraaung.githunt.utils.ResponseRepos
+import com.thuraaung.githunt.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -26,7 +17,7 @@ class DataRepository @Inject constructor(
 ) {
 
 
-    fun getTrendingRepos(language : String,filterBy : String)  = flow {
+    fun getTrendingRepos(language : String,filterBy : String) : Flow<DataState<List<ModelRepo>>> = flow {
 
         emit(LoadingState<List<ModelRepo>>())
 

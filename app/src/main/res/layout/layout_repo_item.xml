@@ -1,97 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="2dp"
-    android:elevation="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="repo"
+            type="com.thuraaung.githunt.model.ModelRepo" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:elevation="4dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_avator"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/drawable_round_holder" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_repo_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/repo_name"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_avator"
-            app:layout_constraintTop_toTopOf="@+id/img_avator" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_avator"
+                app:loadImage="@{ repo.avatar }"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/drawable_round_holder" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_author"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/author"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_avator"
-            app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_repo_name"
+                android:text="@{ repo.name }"
+                tools:text="@string/repo_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_avator"
+                app:layout_constraintTop_toTopOf="@+id/img_avator" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvLanguage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:drawableStart="@drawable/drawable_circle_lang"
-            android:drawablePadding="4dp"
-            android:gravity="center"
-            android:text="@string/language"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvStar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_avator" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_author"
+                android:text="@{ repo.author }"
+                tools:text="@string/author"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_avator"
+                app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvStar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_repo_starts"
-            android:gravity="center"
-            android:text="@string/stars"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintBottom_toBottomOf="@+id/tvLanguage"
-            app:layout_constraintEnd_toStartOf="@+id/tvFork"
-            app:layout_constraintStart_toEndOf="@+id/tvLanguage"
-            app:layout_constraintTop_toTopOf="@+id/tvLanguage" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvLanguage"
+                android:text="@{ repo.language }"
+                app:drawableBackground="@{ repo.languageColor }"
+                tools:text="@string/language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:drawableStart="@drawable/drawable_circle_lang"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvStar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_avator" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvStar"
+                android:text="@{ String.valueOf(repo.stars) }"
+                tools:text="@string/stars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_repo_starts"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toBottomOf="@+id/tvLanguage"
+                app:layout_constraintEnd_toStartOf="@+id/tvFork"
+                app:layout_constraintStart_toEndOf="@+id/tvLanguage"
+                app:layout_constraintTop_toTopOf="@+id/tvLanguage" />
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvFork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:drawableStart="@drawable/ic_repo_fork"
-            android:gravity="center"
-            android:text="@string/fork"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintBottom_toBottomOf="@+id/tvStar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvStar"
-            app:layout_constraintTop_toTopOf="@+id/tvStar" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvFork"
+                android:text="@{ String.valueOf(repo.forks) }"
+                tools:text="@string/fork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:drawableStart="@drawable/ic_repo_fork"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toBottomOf="@+id/tvStar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvStar"
+                app:layout_constraintTop_toTopOf="@+id/tvStar" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
