@@ -53,6 +53,7 @@ class LanguageFilterFragment : Fragment() {
         languageViewModel.listUpdateCallback = {
             binding.rvLanguage.scheduleLayoutAnimation()
         }
+
         languageViewModel.itemClickCallback = { language ->
             requireActivity().hideSoftKeyboard()
             repoViewModel.filterLanguageBy(language.urlParam)

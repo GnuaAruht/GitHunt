@@ -1,11 +1,14 @@
 package com.thuraaung.githunt.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.thuraaung.githunt.base.BaseItem
 import com.thuraaung.githunt.model.ModelRepo.Companion.TABLE_NAME
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = TABLE_NAME)
+@Parcelize
 data class ModelRepo(
     @PrimaryKey
     val url: String,
@@ -17,7 +20,7 @@ data class ModelRepo(
     val languageColor: String? = null,
     val name: String,
     val stars: Int
-) : BaseItem {
+) : Parcelable {
 
     companion object {
         const val TABLE_NAME = "TrendingRepo"

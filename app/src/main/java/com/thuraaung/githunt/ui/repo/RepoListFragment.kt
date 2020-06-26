@@ -90,8 +90,9 @@ class RepoListFragment : Fragment() {
             binding.rvRepos.scheduleLayoutAnimation()
         }
 
-        viewModel.itemClickCallback = {
-            findNavController().navigate(R.id.action_trendingRepos_to_repoDetail)
+        viewModel.itemClickCallback = { repo  ->
+            val action = RepoListFragmentDirections.actionTrendingReposToRepoDetail(repo = repo)
+            findNavController().navigate(action)
         }
 
         NetworkUtils.getNetworkLiveData(requireContext())

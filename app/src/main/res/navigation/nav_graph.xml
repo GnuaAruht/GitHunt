@@ -38,9 +38,15 @@
 
     <fragment
         android:id="@+id/repoDetailFragment"
-        android:name="com.thuraaung.githunt.ui.detail.RepoDetailFragment"
+        android:name="com.thuraaung.githunt.ui.repo.RepoDetailFragment"
         android:label="Repository Detail"
-        tools:layout="@layout/fragment_repo_detail" />
+        tools:layout="@layout/fragment_repo_detail" >
+
+        <argument
+            android:name="repo"
+            app:argType="com.thuraaung.githunt.model.ModelRepo"/>
+
+    </fragment>
 
 
 </navigation>

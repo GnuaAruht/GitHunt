@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         navController = findNavController(R.id.nav_host_frag)
-        navController.addOnDestinationChangedListener { _, des, _ ->
-            if (des.id == R.id.repoDetailFragment)
-                toolbar.hide()
-            else
-                toolbar.show()
-        }
+//        navController.addOnDestinationChangedListener { _, des, _ ->
+//            if (des.id == R.id.repoDetailFragment)
+//                toolbar.hide()
+//            else
+//                toolbar.show()
+//        }
         appConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController,appConfiguration)
 
