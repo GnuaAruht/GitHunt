@@ -15,3 +15,4 @@ Show Most Trending Repos On Github
 * Coroutine flow
 * Navigation Component
 * Glide
+* Databinding
