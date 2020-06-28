@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.thuraaung.githunt.R
 import com.thuraaung.githunt.databinding.FragmentRepoDetailBinding
-import com.thuraaung.githunt.ui.detail.RepoDetailFragmentArgs
 
 
 class RepoDetailFragment : Fragment() {

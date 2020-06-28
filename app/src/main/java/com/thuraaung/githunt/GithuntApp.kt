@@ -25,13 +25,6 @@ class GithuntApp : Application() , HasAndroidInjector {
             .build()
             .inject(this)
 
-        val mode = if (isNight()) {
-            AppCompatDelegate.MODE_NIGHT_YES
-        } else {
-            AppCompatDelegate.MODE_NIGHT_NO
-        }
-
-        AppCompatDelegate.setDefaultNightMode(mode)
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
