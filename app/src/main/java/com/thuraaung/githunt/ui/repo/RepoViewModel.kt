@@ -1,10 +1,9 @@
 package com.thuraaung.githunt.ui.repo
 
 import android.content.Context
-import android.widget.ImageView
 import androidx.lifecycle.*
 import com.thuraaung.githunt.model.ModelRepo
-import com.thuraaung.githunt.repository.DataRepository
+import com.thuraaung.githunt.repository.RepoRepository
 import com.thuraaung.githunt.utils.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
@@ -15,7 +14,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 class RepoViewModel @Inject constructor(
     private val context: Context,
-    private val repository: DataRepository
+    private val repository: RepoRepository
 ) : ViewModel() {
 
     private val _repoDataState = MutableLiveData<StateTrendingRepos>()

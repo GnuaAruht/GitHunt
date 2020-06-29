@@ -11,7 +11,8 @@ import com.thuraaung.githunt.model.ModelRepo
 @Database(entities = [ModelRepo::class,ModelLanguage::class],version = 2,exportSchema = false)
 abstract class TrendingRepoDb : RoomDatabase() {
 
-    abstract fun getDao() : TrendingRepoDao
+    abstract fun trendingRepoDao() : TrendingRepoDao
+    abstract fun languageDao() : LanguageDao
 
     companion object {
 
@@ -20,7 +21,7 @@ abstract class TrendingRepoDb : RoomDatabase() {
 
         fun getInstance(context : Context) : TrendingRepoDb {
             return INSTANCE ?: synchronized(this) {
-                Room.databaseBuilder(
+                INSTANCE ?: Room.databaseBuilder(
                     context,
                     TrendingRepoDb::class.java,
                     "trending_db"

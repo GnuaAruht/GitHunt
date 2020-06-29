@@ -2,8 +2,8 @@ package com.thuraaung.githunt.ui.language
 
 import androidx.lifecycle.*
 import com.thuraaung.githunt.model.ModelLanguage
-import com.thuraaung.githunt.model.ModelRepo
-import com.thuraaung.githunt.repository.DataRepository
+import com.thuraaung.githunt.repository.LanguageRepository
+import com.thuraaung.githunt.repository.RepoRepository
 import com.thuraaung.githunt.utils.ErrorState
 import com.thuraaung.githunt.utils.LoadingState
 import com.thuraaung.githunt.utils.SuccessState
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class LanguageViewModel
-    @Inject constructor(private val dataRepository: DataRepository) : ViewModel() {
+    @Inject constructor(private val languageRepository: LanguageRepository) : ViewModel() {
 
     private val _languageDataState = MutableLiveData<ViewLanguages>()
 
@@ -63,7 +63,7 @@ class LanguageViewModel
 
     fun getLanguages(name : String = "%") {
         viewModelScope.launch {
-            dataRepository.getLanuages(name).collectLatest {
+            languageRepository.getLanuages(name).collectLatest {
                 _languageDataState.postValue(it)
             }
         }

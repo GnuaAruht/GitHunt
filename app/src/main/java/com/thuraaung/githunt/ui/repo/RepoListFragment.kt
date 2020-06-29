@@ -2,89 +2,34 @@ package com.thuraaung.githunt.ui.repo
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.thuraaung.githunt.R
+import com.thuraaung.githunt.base.BaseFragment
 import com.thuraaung.githunt.databinding.FragmentTrendingReposBinding
 import com.thuraaung.githunt.utils.*
-import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class RepoListFragment : Fragment() {
+class RepoListFragment : BaseFragment<FragmentTrendingReposBinding>() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    override val viewModel: RepoViewModel by activityViewModels { viewModelFactory }
 
-    private val viewModel: RepoViewModel by activityViewModels { viewModelFactory }
+    override val layoutRes: Int
+        get() = R.layout.fragment_trending_repos
 
-    private lateinit var binding : FragmentTrendingReposBinding
+    override val viewModelVariable: Int
+        get() = BR.viewModel
 
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(layoutInflater,R.layout.fragment_trending_repos,container,false)
-        return binding.root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_repo, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return when (item.itemId) {
-            R.id.action_filter -> {
-                findNavController().navigate(R.id.action_trendingRepos_to_languageFilter)
-                true
-            }
-            R.id.action_daily -> {
-                viewModel.filterBySince(SinceBy.DAILY)
-                item.isChecked = !item.isChecked
-                true
-            }
-            R.id.action_weekly -> {
-                viewModel.filterBySince(SinceBy.WEEKLY)
-                item.isChecked = !item.isChecked
-                true
-            }
-            R.id.action_monthly -> {
-                viewModel.filterBySince(SinceBy.MONTHLY)
-                item.isChecked = !item.isChecked
-                true
-            }
-            else ->
-                super.onOptionsItemSelected(item)
-        }
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
+    override val callbackOnDataBinding= { binding : FragmentTrendingReposBinding ->
 
         viewModel.listUpdateCallback = {
             binding.rvRepos.scheduleLayoutAnimation()
@@ -129,6 +74,43 @@ class RepoListFragment : Fragment() {
                     }
                 }
             })
+        }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_repo, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.action_filter -> {
+                findNavController().navigate(R.id.action_trendingRepos_to_languageFilter)
+                true
+            }
+            R.id.action_daily -> {
+                viewModel.filterBySince(SinceBy.DAILY)
+                item.isChecked = !item.isChecked
+                true
+            }
+            R.id.action_weekly -> {
+                viewModel.filterBySince(SinceBy.WEEKLY)
+                item.isChecked = !item.isChecked
+                true
+            }
+            R.id.action_monthly -> {
+                viewModel.filterBySince(SinceBy.MONTHLY)
+                item.isChecked = !item.isChecked
+                true
+            }
+            else ->
+                super.onOptionsItemSelected(item)
+        }
 
     }
 
