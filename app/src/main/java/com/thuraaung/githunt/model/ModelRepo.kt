@@ -3,7 +3,6 @@ package com.thuraaung.githunt.model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.thuraaung.githunt.base.BaseItem
 import com.thuraaung.githunt.model.ModelRepo.Companion.TABLE_NAME
 import kotlinx.android.parcel.Parcelize
 
