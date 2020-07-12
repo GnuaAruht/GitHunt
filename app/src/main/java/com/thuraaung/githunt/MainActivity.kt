@@ -1,4 +1,4 @@
-package com.thuraaung.githunt.ui
+package com.thuraaung.githunt
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,10 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.thuraaung.githunt.R
-import com.thuraaung.githunt.utils.hide
+import com.google.android.material.appbar.AppBarLayout
 import com.thuraaung.githunt.utils.hideSoftKeyboard
-import com.thuraaung.githunt.utils.show
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -26,12 +24,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         navController = findNavController(R.id.nav_host_frag)
-//        navController.addOnDestinationChangedListener { _, des, _ ->
-//            if (des.id == R.id.repoDetailFragment)
-//                toolbar.hide()
-//            else
-//                toolbar.show()
-//        }
+        navController.addOnDestinationChangedListener { _, des, _ ->
+            if (des.id == R.id.repoDetailFragment)
+                findViewById<AppBarLayout>(R.id.appbar_layout).setExpanded(true)
+        }
         appConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController,appConfiguration)
 
